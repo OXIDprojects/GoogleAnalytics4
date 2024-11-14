@@ -37,7 +37,7 @@
             {
               'item_id':        '[{$oGtmProduct->getFieldData('oxartnum')}]',
               'item_name':      '[{$oGtmProduct->getFieldData('oxtitle')}]',
-              'price':          [{$d3PriceObject->getPrice()}],
+              [{oxhasrights ident="SHOWARTICLEPRICE"}]'price':          [{$d3PriceObject->getPrice()}],[{/oxhasrights}]
               'item_brand':     '[{if $gtmManufacturer}][{$gtmManufacturer->oxmanufacturers__oxtitle->value}][{/if}]',
               'item_variant':   '[{if $oGtmProduct->getFieldData('oxvarselect')}][{$oGtmProduct->getFieldData('oxvarselect')}][{/if}]',
               [{if $gtmCategory}]
