@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.17.2...rel_2.x) - 2024-x
 
+## [3.0.0.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.22.0...3.0.0.0) - 2024-11-25
+### Added
+- installability OXID 7
+- don't submit item prices, if user doesn't have "show price" right
+
 ## [2.22.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.21.0...2.22.0) - 2024-09-21
 ### Fixed
 - Consentmanager didn't get delivered
