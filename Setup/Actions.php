@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace D3\GoogleAnalytics4\Setup;
 
-
 use D3\GoogleAnalytics4\Application\Model\Constants;
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\Eshop\Core\ViewConfig;
@@ -17,10 +16,11 @@ class Actions
      * @param string $sSettingValue
      * @return void
      */
-    public function d3SaveDefaultSettings(string $sVarType, string $sSettingName, string $sSettingValue){
+    public function d3SaveDefaultSettings(string $sVarType, string $sSettingName, string $sSettingValue)
+    {
         $oConfig = Registry::getConfig();
 
-        if ($this->d3GetModuleConfigParam($sSettingName) and (trim($this->d3GetModuleConfigParam($sSettingName)) !== trim($sSettingValue))){
+        if ($this->d3GetModuleConfigParam($sSettingName) and (trim($this->d3GetModuleConfigParam($sSettingName)) !== trim($sSettingValue))) {
             $sSettingValue = trim($this->d3GetModuleConfigParam($sSettingName));
         }
 

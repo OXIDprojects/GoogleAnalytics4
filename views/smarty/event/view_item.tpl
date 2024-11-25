@@ -28,7 +28,7 @@
                                 'item_list_name':'[{$gtmCategory->getSplitCategoryArray()}]',
                                 [{/if}]
                                 [{assign var="d3PriceObject" value=$gtmProduct->getPrice()}]
-                                [{oxhasrights ident="SHOWARTICLEPRICE"}]'price': [{$d3PriceObject->getPrice()}][{/oxhasrights}]
+                                'price': [{$d3PriceObject->getPrice()}]
                             }
                         ]
                 }[{if $oViewConf->isDebugModeOn()}],

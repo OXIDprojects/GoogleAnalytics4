@@ -6,26 +6,26 @@ use D3\GoogleAnalytics4\Application\Model\CMP\Usercentrics;
 
 class ManagerTypes
 {
-    const EXTERNAL_SERVICE          = "eigener Service";
-    const INTERNAL_EXTERNAL_SERVICE          = "externalService";
-    const NET_COOKIE_MANAGER        = "Netensio Cookie Manager";
-    const INTERNAL_NET_COOKIE_MANAGER        = "net_cookie_manager";
+    public const EXTERNAL_SERVICE          = "eigener Service";
+    public const INTERNAL_EXTERNAL_SERVICE          = "externalService";
+    public const NET_COOKIE_MANAGER        = "Netensio Cookie Manager";
+    public const INTERNAL_NET_COOKIE_MANAGER        = "net_cookie_manager";
 
     /**
      * Further information's:
      * https://github.com/aggrosoft/oxid-cookie-compliance
      */
-    const AGCOOKIECOMPLIANCE        = "Aggrosoft Cookie Compliance";
-    const INTERNAL_AGCOOKIECOMPLIANCE        = "agcookiecompliance";
+    public const AGCOOKIECOMPLIANCE        = "Aggrosoft Cookie Compliance";
+    public const INTERNAL_AGCOOKIECOMPLIANCE        = "agcookiecompliance";
 
-    const CONSENTMANAGER            = "Consentmanager";
-    const INTERNAL_CONSENTMANAGER            = "cmconsentmanager";
+    public const CONSENTMANAGER            = "Consentmanager";
+    public const INTERNAL_CONSENTMANAGER            = "cmconsentmanager";
 
-    const COOKIEFIRST               = "Cookiefirst";
-    const INTERNAL_COOKIEFIRST               = "cookiefirst";
+    public const COOKIEFIRST               = "Cookiefirst";
+    public const INTERNAL_COOKIEFIRST               = "cookiefirst";
 
-    const COOKIEBOT                 = "Cookiebot";
-    const INTERNAL_COOKIEBOT                 = "cookiebot";
+    public const COOKIEBOT                 = "Cookiebot";
+    public const INTERNAL_COOKIEBOT                 = "cookiebot";
 
     /**
      * @return array
@@ -48,25 +48,25 @@ class ManagerTypes
      * @param string $sManager
      * @return bool
      */
-    public function isManagerInList(string $sManager) :bool
+    public function isManagerInList(string $sManager): bool
     {
         return in_array($sManager, array_keys($this->getManagerList()), true);
     }
-	
-	/**
-	 * @return array
-	 *
-	 * the CMP from this method always needs the script tag delivered to the dom.
-	 */
-	public function scriptTagDeliveredByDefaultArray() :array
-	{
-		return [
-			Usercentrics::sModuleIncludationInternalName,
-			Usercentrics::sExternalIncludationInternalName,
-			ManagerTypes::INTERNAL_CONSENTMANAGER,
-			ManagerTypes::INTERNAL_COOKIEFIRST,
-			ManagerTypes::INTERNAL_COOKIEBOT,
-			ManagerTypes::INTERNAL_EXTERNAL_SERVICE
-		];
-	}
+
+    /**
+     * @return array
+     *
+     * the CMP from this method always needs the script tag delivered to the dom.
+     */
+    public function scriptTagDeliveredByDefaultArray(): array
+    {
+        return [
+            Usercentrics::sModuleIncludationInternalName,
+            Usercentrics::sExternalIncludationInternalName,
+            ManagerTypes::INTERNAL_CONSENTMANAGER,
+            ManagerTypes::INTERNAL_COOKIEFIRST,
+            ManagerTypes::INTERNAL_COOKIEBOT,
+            ManagerTypes::INTERNAL_EXTERNAL_SERVICE,
+        ];
+    }
 }

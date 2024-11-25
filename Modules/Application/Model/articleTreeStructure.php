@@ -8,9 +8,9 @@ trait articleTreeStructure
      * @param int $indexOfArray
      * @return string
      */
-    public function getSplitCategoryArray(int $indexOfArray = -1, bool $bShallTakeStd = false) :string
+    public function getSplitCategoryArray(int $indexOfArray = -1, bool $bShallTakeStd = false): string
     {
-        if ($bShallTakeStd){
+        if ($bShallTakeStd) {
             $splitCatArray =
                 array_values(
                     array_filter(
@@ -26,9 +26,9 @@ trait articleTreeStructure
                     )
                 );
 
-            if (($indexOfArray >= 0) and (false === empty($splitCatArray[$indexOfArray]))){
+            if (($indexOfArray >= 0) and (false === empty($splitCatArray[$indexOfArray]))) {
                 return $splitCatArray[$indexOfArray];
-            }else{
+            } else {
                 return "";
             }
         }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace D3\GoogleAnalytics4\Application\Model\CMP;
 
-
 use D3\GoogleAnalytics4\Application\Model\ManagerTypes;
 
 /**
@@ -18,8 +17,8 @@ use D3\GoogleAnalytics4\Application\Model\ManagerTypes;
  */
 class Usercentrics extends ConsentManagementPlatformBaseModel
 {
-    const sExternalIncludationPublicName    = "( Externe Einbindung ) Usercentrics";
-    const sExternalIncludationInternalName  = "usercentrics";
-    const sModuleIncludationPublicName      = "( Modul ) Usercentrics";
-    const sModuleIncludationInternalName    = "oxps_usercentrics";
+    public const sExternalIncludationPublicName    = "( Externe Einbindung ) Usercentrics";
+    public const sExternalIncludationInternalName  = "usercentrics";
+    public const sModuleIncludationPublicName      = "( Modul ) Usercentrics";
+    public const sModuleIncludationInternalName    = "oxps_usercentrics";
 }

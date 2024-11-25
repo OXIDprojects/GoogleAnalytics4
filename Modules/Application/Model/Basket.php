@@ -9,11 +9,11 @@ class Basket extends Basket_parent
     /**
      * @return string
      */
-    public function getPaymentOnPaymentId() :string
+    public function getPaymentOnPaymentId(): string
     {
-        if ($this->getPaymentId()){
+        if ($this->getPaymentId()) {
             $oPayment = oxNew(Payment::class);
-            if ($oPayment->load($this->getPaymentId())){
+            if ($oPayment->load($this->getPaymentId())) {
                 return $oPayment->getFieldData('oxdesc');
             }
         }

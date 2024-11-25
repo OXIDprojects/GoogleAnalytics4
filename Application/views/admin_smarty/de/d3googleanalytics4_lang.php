@@ -1,9 +1,10 @@
 <?php
+
 $sLangName = "Deutsch";
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
-$aLang = array(
+$aLang = [
     'charset'                   => 'UTF-8',
 
     'd3mxgoogleanalytics4'      => 'Google Analytics 4',
@@ -120,4 +121,4 @@ Nachher:
 src="{Domain}?id={Container-ID}"
 </code>
                                                                         </pre>',
-);
+];

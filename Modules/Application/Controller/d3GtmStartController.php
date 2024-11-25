@@ -10,7 +10,7 @@ class d3GtmStartController extends d3GtmStartController_parent
     {
         $return = parent::render();
 
-        if (false === in_array('oxcmp_basket', $this->getComponents())){
+        if (false === in_array('oxcmp_basket', $this->getComponents())) {
             $this->addTplParam('d3CmpBasket', $this->getComponent('oxcmp_basket'));
         }
 

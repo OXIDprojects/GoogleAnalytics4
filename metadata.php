@@ -57,7 +57,7 @@ $aModule = [
     'email' => 'support@shopmodule.com',
     'url' => 'https://www.oxidmodule.com/',
     'controllers' => [
-        'd3googleanalytics4_main' => GA4AdminUserInterfaceMainController::class
+        'd3googleanalytics4_main' => GA4AdminUserInterfaceMainController::class,
     ],
     'extend' => [
         // Core
@@ -114,45 +114,48 @@ $aModule = [
             'template' => 'layout/base.tpl',
             'block' => 'head_meta_robots',
             'file' => 'views/smarty/blocks/_gtm_js.tpl',
-            'position' => 150
+            'position' => 150,
         ],
         // tag manager nojs
         [
             'template' => 'layout/base.tpl',
             'block' => 'theme_svg_icons',
-            'file' => 'views/smarty/blocks/_gtm_nojs.tpl'
+            'file' => 'views/smarty/blocks/_gtm_nojs.tpl',
+			'position' => 150,
         ],
         // details
         [
             'template' => 'page/details/inc/productmain.tpl',
             'block' => 'details_productmain_title',
             'file' => 'views/smarty/blocks/view_item.tpl',
-            'position' => 150
+            'position' => 150,
         ],
         // View Cart
         [
             'template' => 'page/checkout/basket.tpl',
             'block' => 'checkout_basket_main',
-            'file' => 'views/smarty/blocks/view_cart.tpl'
+            'file' => 'views/smarty/blocks/view_cart.tpl',
+            'position' => 150,
         ],
         // add_to_cart
         [
             'template' => 'page/details/inc/productmain.tpl',
             'block' => 'details_productmain_tobasket',
             'file' => 'views/smarty/blocks/details_productmain_tobasket.tpl',
-            'position' => 150
+            'position' => 150,
         ],
         // remove_from_cart
         [
             'template' => 'page/checkout/basket.tpl',
             'block' => 'checkout_basket_main',
             'file' => 'views/smarty/blocks/remove_from_cart.tpl',
-            'position' => 150
+            'position' => 150,
         ],
         [
             'template' => 'page/checkout/thankyou.tpl',
             'block' => 'checkout_thankyou_main',
-            'file' => 'views/smarty/blocks/purchase.tpl'
+            'file' => 'views/smarty/blocks/purchase.tpl',
+			'position' => 150,
         ],
         // Lists
         // view_item_list
@@ -160,26 +163,26 @@ $aModule = [
             'template' => 'page/list/list.tpl',
             'block' => 'page_list_productlist',
             'file' => 'views/smarty/blocks/view_item_list.tpl',
-            'position' => 150
+            'position' => 150,
         ],
         // view_search_result
         [
             'template' => 'page/search/search.tpl',
             'block' => 'search_results',
             'file' => 'views/smarty/blocks/view_search_result.tpl',
-            'position' => 150
+            'position' => 150,
         ],
         [
             'template' => 'page/list/list.tpl',
             'block' => 'page_list_listbody',
             'file' => 'views/smarty/blocks/page_list_listbody.tpl',
-            'position' => 150
+            'position' => 150,
         ],
         [
             'template' => 'page/shop/start.tpl',
             'block' => 'start_welcome_text',
             'file' => 'views/smarty/blocks/start_welcome_text.tpl',
-            'position' => 150
+            'position' => 150,
         ],
         // Checkout process
         // Begin CHeckout
@@ -187,7 +190,7 @@ $aModule = [
             'template' => 'page/checkout/user.tpl',
             'block' => 'checkout_user_main',
             'file' => 'views/smarty/blocks/begin_checkout.tpl',
-            'position' => 150
+            'position' => 150,
         ],
         // Add payment info
         // We add it into checkout_order_main ( checkout/order.tpl ) to make sure a payment is actually added;
@@ -196,7 +199,7 @@ $aModule = [
             'template' => 'page/checkout/order.tpl',
             'block' => 'checkout_order_main',
             'file' => 'views/smarty/blocks/add_payment_info.tpl',
-            'position' => 150
+            'position' => 150,
         ],
     ],
     'events' => [

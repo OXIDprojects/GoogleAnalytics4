@@ -12,7 +12,7 @@ class ManagerHandler
      *
      * @return string
      */
-    public function getCurrManager() :string
+    public function getCurrManager(): string
     {
         /** @var ManagerTypes $oManagerTypes */
         $oManagerTypes = oxNew(ManagerTypes::class);
@@ -22,15 +22,15 @@ class ManagerHandler
 
         $aManagerList =  $oManagerTypes->getManagerList();
 
-        if ($this->getModuleSettingExplicitManagerSelectValue()){
+        if ($this->getModuleSettingExplicitManagerSelectValue()) {
             return $this->getExplicitManager();
         }
 
-        foreach ($aManagerList as $shopModuleId => $publicCMPName){
-           if ($oViewConfig->d3IsModuleActive($shopModuleId)){
-               $this->d3SaveShopConfVar($shopModuleId);
-               return $shopModuleId;
-           }
+        foreach ($aManagerList as $shopModuleId => $publicCMPName) {
+            if ($oViewConfig->d3IsModuleActive($shopModuleId)) {
+                $this->d3SaveShopConfVar($shopModuleId);
+                return $shopModuleId;
+            }
         }
 
         return "";
@@ -40,7 +40,8 @@ class ManagerHandler
      * @param string $sParam
      * @return void
      */
-    public function d3SaveShopConfVar(string $sParam){
+    public function d3SaveShopConfVar(string $sParam)
+    {
         Registry::getConfig()->saveShopConfVar(
             'select',
             Constants::OXID_MODULE_ID."_HAS_STD_MANAGER",
@@ -53,15 +54,15 @@ class ManagerHandler
     /**
      * @return string
      */
-    public function getModuleSettingExplicitManagerSelectValue() :string
+    public function getModuleSettingExplicitManagerSelectValue(): string
     {
-        return Registry::get(ViewConfig::class)->d3GetModuleConfigParam('_HAS_STD_MANAGER')?:"";
+        return Registry::get(ViewConfig::class)->d3GetModuleConfigParam('_HAS_STD_MANAGER') ?: "";
     }
 
     /**
      * @return string
      */
-    public function getExplicitManager() :string
+    public function getExplicitManager(): string
     {
         $sPotentialManagerName = $this->getModuleSettingExplicitManagerSelectValue();
 

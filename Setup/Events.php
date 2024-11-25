@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace D3\GoogleAnalytics4\Setup;
 
-
 class Events
 {
     /**
@@ -33,5 +32,7 @@ class Events
     /**
      * @return void
      */
-    public static function onDeactivate(){}
+    public static function onDeactivate()
+    {
+    }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace D3\GoogleAnalytics4\Modules\Application\Controller;
 
-
 class d3GtmSearchController extends d3GtmSearchController_parent
 {
     /**
@@ -14,7 +13,7 @@ class d3GtmSearchController extends d3GtmSearchController_parent
     {
         $return = parent::render();
 
-        if (false === in_array('oxcmp_basket', $this->getComponents())){
+        if (false === in_array('oxcmp_basket', $this->getComponents())) {
             $this->addTplParam('d3CmpBasket', $this->getComponent('oxcmp_basket'));
         }
 
