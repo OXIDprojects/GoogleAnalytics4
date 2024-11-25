@@ -90,7 +90,7 @@ $aModule = [
         // Event files that store the GA4 Event-Information
         '@' . Constants::OXID_MODULE_ID . '/event/add_to_cart.tpl' => 'views/smarty/event/add_to_cart.tpl',
         '@' . Constants::OXID_MODULE_ID . '/event/view_item.tpl' => 'views/smarty/event/view_item.tpl',
-        '@' . Constants::OXID_MODULE_ID . '/event/view_item.tpl' => 'views/smarty/event/view_item.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/view_cart.tpl' => 'views/smarty/event/view_cart.tpl',
         '@' . Constants::OXID_MODULE_ID . '/event/begin_checkout.tpl' => 'views/smarty/event/begin_checkout.tpl',
         '@' . Constants::OXID_MODULE_ID . '/event/add_payment_info.tpl' => 'views/smarty/event/add_payment_info.tpl',
         '@' . Constants::OXID_MODULE_ID . '/event/purchase.tpl' => 'views/smarty/event/purchase.tpl',
