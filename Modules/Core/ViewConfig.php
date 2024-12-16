@@ -207,10 +207,34 @@ class ViewConfig extends ViewConfig_parent
             'sessionid' => session_id(),
             //'httpref'   => $_SERVER["HTTP_REFERER"] ?? "unknown"
         ];
+		
+		$dataLayer = $this->d3AdditionalGlobalAnalyticsVariables($dataLayer);
 
         return json_encode([$dataLayer], JSON_PRETTY_PRINT);
     }
-
+	
+	/**
+	 * @param array $dataLayerGlobals
+	 * @return array
+	 */
+	public function d3AdditionalGlobalAnalyticsVariables(array $dataLayerGlobals) :array
+	{
+		/** @var User $oUser */
+		$oUser  = Registry::getSession()->getUser();
+		if ($oUser and $oUser->getFieldData('OXUSERNAME')){
+			$sUsername 	= $oUser->getFieldData('OXUSERNAME') ?: "";
+			$iCustNr 			= $oUser->getFieldData('OXCUSTNR') ?: "";
+			$iZipCode 		= $oUser->getFieldData('OXZIP') ?: "";
+			
+			return array_merge($dataLayerGlobals, [
+				'custnr'		=> $iCustNr,
+				'email' 		=> $sUsername,
+				'zipcode' 	=> $iZipCode
+			]);
+		}
+		return $dataLayerGlobals;
+	}
+	
     public function isDebugModeOn() :bool
     {
         return $this->d3GetModuleConfigParam("_blEnableDebug")?: false;
