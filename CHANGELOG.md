@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - data layer doesn't contain prices if current user hasn't "show price" rights
 
+## [2.23.0.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.22.0...2.23.0.0) - 2024-12-21
+### Added
+- another tag-versioning position
+- additional global variables, if given
+
 ## [2.22.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.21.0...2.22.0) - 2024-09-21
 ### Fixed
 - Consentmanager didn't get delivered
