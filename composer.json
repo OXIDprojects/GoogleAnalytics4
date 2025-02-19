@@ -45,12 +45,18 @@
   "require": {
     "php": "7.1 - 8.2",
     "oxid-esales/oxideshop-ce": "^6.5.3",
-    "google/apiclient":" ^2.0",
+    "google/apiclient":" ^2.0"
+  },
+  "require-dev": {
     "phpstan/phpstan": "^1.10"
   },
-  "autoload": {
+    "autoload": {
     "psr-4": {
       "D3\\GoogleAnalytics4\\": "../../../source/modules/d3/googleanalytics4"
     }
+  },
+  "scripts": {
+    "php-cs-fixer_audit": "./vendor/bin/php-cs-fixer list-files --config=./vendor/d3/googleanalytics4/.php-cs-fixer.php",
+    "php-cs-fixer_fix": "./vendor/bin/php-cs-fixer fix --config=./vendor/d3/googleanalytics4/.php-cs-fixer.php"
   }
 }
