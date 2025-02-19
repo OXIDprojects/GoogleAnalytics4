@@ -7,6 +7,7 @@ $aLang = array(
     'charset'                   => 'UTF-8',
 
     'd3mxgoogleanalytics4'      => 'Google Analytics 4',
+    'd3mxd3modules'      => 'Google Analytics 4',
     'd3mxgoogleanalytics4set'   => 'Einstellungen',
 
     // Base Translations
