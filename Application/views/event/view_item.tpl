@@ -6,7 +6,6 @@
     [{capture name="d3_ga4_view_item"}]
         [{strip}]
             dataLayer.push({"event": null, "eventLabel": null, "ecommerce": null});  /* Clear the previous ecommerce object. */
-
             dataLayer.push({
                 'event': 'view_item',
                 'eventLabel':'Product View',
