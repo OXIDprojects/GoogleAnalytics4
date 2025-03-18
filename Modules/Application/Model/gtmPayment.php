@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace D3\GoogleAnalytics4\Modules\Application\Model;
 
+
 use OxidEsales\Eshop\Application\Model\Payment;
 use OxidEsales\Eshop\Core\Registry;
 
