@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - installability OXID 7
 - don't submit item prices, if user doesn't have "show price" right
 
+## [2.23.0.2](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.1...2.23.0.2) - 2025-03-19
+### Fixed
+- reset of cmp-selection
+- over-engineered getter-methods
+
 ## [2.23.0.1](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.0...2.23.0.1) - 2025-02-19
 ### Fixed
 - false metadata view_cart entry
