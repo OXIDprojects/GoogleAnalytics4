@@ -21,7 +21,7 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
         $this->addTplParam('d3ViewObject', $this);
         $this->addTplParam('d3ViewConfObject', Registry::get(ViewConfig::class));
         $this->addTplParam('d3ManagerTypeArray', oxNew(ManagerTypes::class)->getManagerList());
-        $this->addTplParam('d3CurrentCMP', oxNew(ManagerHandler::class)->getCurrManager());
+        $this->addTplParam('d3CurrentCMP', oxNew(ManagerHandler::class)->getActManager());
 
         return $return;
     }
@@ -41,10 +41,10 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
             '_blEnableUsercentricsConsentModeApi',
         ];
 
-        foreach ($aCheckBoxParams as $checkBoxName) {
-            if (isset($aParams['bool'][$checkBoxName])) {
+        foreach ($aCheckBoxParams as $checkBoxName){
+            if (isset($aParams['bool'][$checkBoxName])){
                 $aParams['bool'][$checkBoxName] = true;
-            } else {
+            }else{
                 $aParams['bool'][$checkBoxName] = false;
             }
         }
@@ -60,8 +60,8 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
     {
         $oConfig = Registry::getConfig();
         foreach ($aParams as $sConfigType => $aConfigParams) {
-            foreach ($aConfigParams as $sParamName => $sParamValue) {
-                if ($this->d3GetModuleConfigParam($sParamName) !== $sParamValue) {
+            foreach ($aConfigParams as $sParamName => $sParamValue){
+                if($this->d3GetModuleConfigParam($sParamName) !== $sParamValue){
                     $oConfig->saveShopConfVar(
                         $sConfigType,
                         Constants::OXID_MODULE_ID.$sParamName,

@@ -54,7 +54,7 @@ class ViewConfig extends ViewConfig_parent
         if ($this->sCookieManagerType === null) {
             /** @var ManagerHandler $oManagerHandler */
             $oManagerHandler = oxNew(ManagerHandler::class);
-            $this->sCookieManagerType = $oManagerHandler->getCurrManager();
+            $this->sCookieManagerType = $oManagerHandler->getActManager();
         }
     }
 
