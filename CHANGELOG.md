@@ -5,18 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [unreleased](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.2...rel_2.x) - 2025-x
-### Added
-- data layer doesn't contain prices if current user hasn't "show price" rights
 
 ## [2.23.0.2](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.1...2.23.0.2) - 2025-03-19
 ### Fixed
-- unwanted reste of chosen CMP in admin
-- over-engineered method construct
+- reset of cmp-selection
+- over-engineered getter-methods
 
 ## [2.23.0.1](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.0...2.23.0.1) - 2025-02-19
 ### Fixed
 - false metadata view_cart entry
 - missing menu-translation
+### Added
+- data layer doesn't contain prices if current user hasn't "show price" rights
 
 ## [2.23.0.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.22.0...2.23.0.0) - 2024-12-21
 ### Added
