@@ -21,7 +21,12 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
         $this->addTplParam('d3ViewObject', $this);
         $this->addTplParam('d3ViewConfObject', Registry::get(ViewConfig::class));
         $this->addTplParam('d3ManagerTypeArray', oxNew(ManagerTypes::class)->getManagerList());
-        $this->addTplParam('d3CurrentCMP', oxNew(ManagerHandler::class)->getCurrManager());
+		
+		$sActManager = oxNew(ManagerHandler::class)->getCurrManager();
+        $this->addTplParam('d3CurrentCMP', $sActManager);
+		
+		//Todo: hier ein Test, ist es denn nötig IMMER, meinen Wert zu speichern? Eigentlich doch nur, wenn ich im Admin auf speichern klicke!
+		//oxNew(ManagerHandler::class)->d3SaveShopConfVar($sActManager);
 
         return $return;
     }

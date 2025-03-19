@@ -14,21 +14,18 @@ class ManagerHandler
      */
     public function getCurrManager() :string
     {
+		if ($this->getModuleSettingExplicitManagerSelectValue()){
+			return $this->getExplicitManager();
+		}
+		
         /** @var ManagerTypes $oManagerTypes */
         $oManagerTypes = oxNew(ManagerTypes::class);
-
         /** @var ViewConfig $oViewConfig */
         $oViewConfig = oxNew(ViewConfig::class);
-
         $aManagerList =  $oManagerTypes->getManagerList();
-
-        if ($this->getModuleSettingExplicitManagerSelectValue()){
-            return $this->getExplicitManager();
-        }
 
         foreach ($aManagerList as $shopModuleId => $publicCMPName){
            if ($oViewConfig->isModuleActive($shopModuleId)){
-               $this->d3SaveShopConfVar($shopModuleId);
                return $shopModuleId;
            }
         }
@@ -70,8 +67,6 @@ class ManagerHandler
         $sCMPName = $oManagerTypes->isManagerInList($sPotentialManagerName)
             ? $sPotentialManagerName
             : "NONE";
-
-        $this->d3SaveShopConfVar($sCMPName);
 
         return $sCMPName;
     }
