@@ -40,6 +40,7 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
             '_blUseRealCategoyTitles',
             '_blEnableMeasurementCapabilities',
             '_blEnableUsercentricsConsentModeApi',
+            '_blViewItemAddVariants',
         ];
 
         foreach ($aCheckBoxParams as $checkBoxName){
