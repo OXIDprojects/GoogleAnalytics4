@@ -35,6 +35,7 @@
           'value':      iArtQuantity*[{$d3PriceObject->getPrice()}],
           'items':      [
             {
+              'item_oxid':      '[{$oGtmProduct->getFieldData('oxid')}]',
               'item_id':        '[{$oGtmProduct->getFieldData('oxartnum')}]',
               'item_name':      '[{$oGtmProduct->getFieldData('oxtitle')}]',
               'price':          [{$d3PriceObject->getPrice()}],
