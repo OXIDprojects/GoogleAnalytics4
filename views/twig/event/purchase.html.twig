@@ -1,0 +1,56 @@
+{% block d3_ga4_purchase_block %}
+    {% capture name = "d3_ga4_purchase" %}
+        {% spaceless %}
+            dataLayer.push({"event": null, "eventLabel": null, "ecommerce": null});  /* Clear the previous ecommerce object. */
+            {% set gtmOrder = oView.getOrder() %}
+            {% set gtmBasket = oView.getBasket() %}
+            {% set gtmArticles = gtmOrder.getOrderArticles() %}
+            {% set gtmOrderVouchers = gtmOrder.getVoucherNrList() %}
+
+            dataLayer.push({
+                'event': 'purchase',
+                'eventLabel':'Checkout Step 5',
+                'ecommerce':
+                {
+                    'transaction_id': '{{ gtmOrder.getFieldData("oxordernr") }}',
+                    'affiliation':    '{{ oxcmp_shop.getFieldData("oxname") }}',
+                    'value':          {{ gtmOrder.getTotalOrderSum() }},
+                    'tax':            {{ gtmOrder.getFieldData("oxartvatprice1")+gtmOrder.getFieldData("oxartvatprice2") }},
+                    'shipping':       {{ gtmOrder.getFieldData("oxdelcost") }},
+                    'currency':       '{{ gtmOrder.getFieldData('oxcurrency') }}',
+                    'coupon':         '{% for gtmOrderVoucher in gtmOrderVouchers %}{{ gtmOrderVoucher }}{% if not loop.last %}, {% endif %}{% endfor %}',
+                    'paymentType':    '{{ gtmBasket.getPaymentOnPaymentId() }}',
+                    'items':
+                    [
+                        {% for gtmBasketItem in gtmArticles %}
+                        {% set gtmPurchaseItemPriceObject = gtmBasketItem.getPrice() %}
+                        {% set gtmPurchaseItem = gtmBasketItem.getArticle() %}
+                        {% set gtmPurchaseItemCategory = gtmPurchaseItem.getCategory() %}
+
+                        {
+                            'item_id':          '{{ gtmBasketItem.getFieldData("oxartnum") }}',
+                            'item_name':        '{{ gtmBasketItem.getFieldData("oxtitle") }}',
+                            'affiliation':      '{{ gtmBasketItem.getFieldData("oxtitle") }}',
+                            'coupon':           '{% for gtmOrderVoucher in gtmOrderVouchers %}{{ gtmOrderVoucher }}{% if not loop.last %}, {% endif %}{% endfor %}',
+                            'item_variant':     '{{ gtmBasketItem.getFieldData("oxselvariant") }}',
+                            {% if gtmPurchaseItemCategory %}
+                            'item_category':    '{{ gtmPurchaseItemCategory.getSplitCategoryArray(0, true) }}',
+                            'item_category_2':  '{{ gtmPurchaseItemCategory.getSplitCategoryArray(1, true) }}',
+                            'item_category_3':  '{{ gtmPurchaseItemCategory.getSplitCategoryArray(2, true) }}',
+                            'item_category_4':  '{{ gtmPurchaseItemCategory.getSplitCategoryArray(3, true) }}',
+                            'item_list_name':   '{{ gtmPurchaseItemCategory.getSplitCategoryArray() }}',
+                            {% endif %}
+                            'price':            {{ gtmPurchaseItemPriceObject.getPrice() }},
+                            'quantity':         {{ gtmBasketItem.getFieldData("oxamount") }},
+                            'position':         {{ loop.index }}
+                        }{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    ]
+                }{% if oViewConf.isDebugModeOn() %},
+                'debug_mode': 'true'
+                {% endif %}
+            })
+        {% endspaceless %}
+    {% endcapture %}
+    {{ script({ add: smarty.capture.d3_ga4_purchase, dynamic: __oxid_include_dynamic }) }}
+{% endblock %}
