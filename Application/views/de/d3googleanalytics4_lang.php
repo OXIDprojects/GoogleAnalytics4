@@ -123,7 +123,14 @@ Nachher:
 src="{Domain}?id={Container-ID}"
 </code>
                                                                         </pre>',
-    'D3EXTENDEDCONFIG' => 'Erweiterte Konfiguration',
-    'D3VIEWITEMADDVARIANTS' => 'Varianten in view_item Event senden',
-    'D3VIEWITEMADDVARIANTS_HELP' => 'Wenn aktiviert, werden die Varianten des Produktes im view_item Event beim betrachten des Vater-Artikels an Google Analytics gesendet.<br />Dies ist dann notwendig, wenn die Varianten nicht gesondert ausgewählt werden können und direkt von der Seite des Vater-Artikels in den Warenkorb gelegt werden können.',
+    'D3EXTENDEDCONFIG' => 'Erweiterte [GA4] Ereignisskonfiguration',
+    'D3VIEWITEMADDVARIANTS' => 'Varianten des Artikels mit auflisten ( Artikeldetailsseite/ "view_item"-Event)',
+    'D3VIEWITEMADDVARIANTS_HELP' => 'Wenn aktiviert, <u>werden die Varianten des Artikels</u> 
+        an das "view_item"-Event-Array angehangen. ( Artikeldetailsseite )<br>
+        Dies ist dann notwendig, wenn die Varianten nicht gesondert ausgewählt werden können und direkt von der Seite 
+        des Hauptartikels in den Warenkorb gelegt werden können.
+        <br>
+        <br>
+        Standardmäßig werden keine Varianten an das "view_item"-Event-Array angehangen.<br>
+        Je nach Artikel kann es hier zu wesentlicher vergrößerung kommen.',
 );
