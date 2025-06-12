@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - return payment-object instead of string
 - missing semicolon
+- irritating admin-list module-group-name
 ### Added
 - 'item_oxid' parameter
 - 'item_brand' parameter
