@@ -1,4 +1,4 @@
-{% capture append = "oxidBlock_content" %}
+{% set oxidBlock_content %}
     {% set template_title = "LISTMANIA"|translate %}
     {% set _actvrecommlist = oView.getActiveRecommList() %}
 
@@ -24,9 +24,9 @@
     {% include '@d3googleanalytics4/event/add_to_cart.html.twig' with {htmlIdAmountOfArticles: '#amountToBasket'} %}
 
     {{ insert_tracker({title: template_title}) }}
-{% endcapture %}
-{% capture append = "oxidBlock_sidebar" %}
+{% endset %}
+{% set oxidBlock_sidebar %}
     {% include "page/account/inc/account_menu.html.twig" with {active_link: "recommendationlist"} %}
-{% endcapture %}
+{% endset %}
 {% include "layout/page.html.twig" with {sidebar: "Left"} %}
 

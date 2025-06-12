@@ -1,6 +1,6 @@
 {% block d3_ga4_purchase_block %}
-    {% capture name = "d3_ga4_purchase" %}
-        {% spaceless %}
+    {% set d3_ga4_purchase %}
+        {% apply spaceless %}
             dataLayer.push({"event": null, "eventLabel": null, "ecommerce": null});  /* Clear the previous ecommerce object. */
             {% set gtmOrder = oView.getOrder() %}
             {% set gtmBasket = oView.getBasket() %}
@@ -29,8 +29,8 @@
 
                         {
                             'item_id':          '{{ gtmBasketItem.getFieldData("oxartnum") }}',
-                            'item_name':        '{{ gtmBasketItem.getFieldData("oxtitle") }}',
-                            'affiliation':      '{{ gtmBasketItem.getFieldData("oxtitle") }}',
+                            'item_name':        '{{ gtmBasketItem.getFieldData('oxtitle')|raw }}',
+                            'affiliation':      '{{ gtmBasketItem.getFieldData('oxtitle')|raw }}',
                             'coupon':           '{% for gtmOrderVoucher in gtmOrderVouchers %}{{ gtmOrderVoucher }}{% if not loop.last %}, {% endif %}{% endfor %}',
                             'item_variant':     '{{ gtmBasketItem.getFieldData("oxselvariant") }}',
                             {% if gtmPurchaseItemCategory %}
@@ -50,7 +50,7 @@
                 'debug_mode': 'true'
                 {% endif %}
             })
-        {% endspaceless %}
-    {% endcapture %}
-    {{ script({ add: smarty.capture.d3_ga4_purchase, dynamic: __oxid_include_dynamic }) }}
+        {% endapply %}
+    {% endset %}
+    {{ script({ add: d3_ga4_purchase.__toString(), dynamic: __oxid_include_dynamic }) }}
 {% endblock %}

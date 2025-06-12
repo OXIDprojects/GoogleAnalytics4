@@ -8,8 +8,7 @@
 
 {% if oViewConf.isGA4enabled() and oViewConf.D3blShowGtmScript() %}
     {% if d3GtmContainerIdString %}
-        {% spaceless %}
-
+        {% apply spaceless %}
             {% if oViewConf.isGtmConsentModeSetActivated() %}
                 <script type="text/javascript">
                 {% if oViewConf.d3IsUsercentricsCMPChosen() and oViewConf.d3GetModuleConfigParam('_blEnableMeasurementCapabilities') %}
@@ -48,7 +47,7 @@
               })(window, document, 'script', 'dataLayer', '{{ d3GtmContainerIdString }}');
             </script>
             <!-- End Google Tag Manager -->
-        {% endspaceless %}
+        {% endapply %}
     {% endif %}
 {% endif %}
 

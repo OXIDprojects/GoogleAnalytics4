@@ -3,7 +3,7 @@
 {% set gtmManufacturer = gtmProduct.getManufacturer() %}
 
 {% block d3_ga4_view_item_block %}
-    {% capture name = "d3_ga4_view_item" %}
+    {% set d3_ga4_view_item %}
         {% spaceless %}
             dataLayer.push({"event": null, "eventLabel": null, "ecommerce": null});  /* Clear the previous ecommerce object. */
 
@@ -16,9 +16,9 @@
                     'items':
                         [
                             {
-                                'item_name': '{{ gtmProduct.getFieldData("oxtitle") }}',
+                                'item_name': '{{ gtmProduct.getFieldData('oxtitle')|raw }}',
                                 'item_id': '{{ gtmProduct.getFieldData("oxartnum") }}',
-                                'item_brand': '{% if gtmManufacturer %}{{ gtmManufacturer.oxmanufacturers__oxtitle.value }}{% endif %}',
+                                'item_brand': '{% if gtmManufacturer %}{{ gtmManufacturer.getFieldData('oxtitle')|raw }}{% endif %}',
                                 'item_variant': '{% if gtmProduct.getFieldData("oxvarselect") %}{{ gtmProduct.getFieldData("oxvarselect") }}{% endif %}',
                                 {% if gtmCategory %}
                                 'item_category':  '{{ gtmCategory.getSplitCategoryArray(0, true) }}',
@@ -35,7 +35,7 @@
                 'debug_mode': 'true'
                 {% endif %}
             });
-        {% endspaceless %}
-    {% endcapture %}
-    {{ script({ add: smarty.capture.d3_ga4_view_item, dynamic: __oxid_include_dynamic }) }}
+        {% endapply %}
+    {% endset %}
+    {{ script({ add: d3_ga4_view_item.__toString(), dynamic: __oxid_include_dynamic }) }}
 {% endblock %}

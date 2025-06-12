@@ -1,4 +1,4 @@
-{% capture append = "oxidBlock_content" %}
+{% set oxidBlock_content %}
     {% set template_title = "MY_WISH_LIST"|translate %}
     <h1 class="page-header">{{ translate({ ident: "MY_WISH_LIST" }) }}</h1>
 
@@ -11,8 +11,8 @@
     {% include '@d3googleanalytics4/event/add_to_cart.html.twig' with {htmlIdAmountOfArticles: '#amountToBasket'} %}
 
     {{ insert_tracker({title: template_title}) }}
-    {% endcapture %}
-{% capture append = "oxidBlock_sidebar" %}
+    {% endset %}
+{% set oxidBlock_sidebar %}
     {% include "page/account/inc/account_menu.html.twig" with {active_link: "noticelist"} %}
-    {% endcapture %}
+    {% endset %}
 {% include "layout/page.html.twig" with {sidebar: "Left"} %}

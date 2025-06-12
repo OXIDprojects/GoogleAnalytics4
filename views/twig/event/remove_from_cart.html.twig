@@ -1,8 +1,8 @@
 {% block d3_ga4_remove_from_cart_block %}
     {% if hasBeenReloaded %}
         {% set d3BasketPrice = oxcmp_basket.getPrice() %}
-        {% capture name = "d3_ga4_remove_from_cart" %}
-            {% spaceless %}
+        {% set d3_ga4_remove_from_cart %}
+            {% apply spaceless %}
                 dataLayer.push({"event": null, "eventLabel": null, "ecommerce": null});  /* Clear the previous ecommerce object. */
                 dataLayer.push({
                     'isRemoveFromCart': true,
@@ -19,7 +19,7 @@
                             {% set gtmBasketItemCategory = rmItem.getCategory() %}
                             {
                             'item_id':          '{{ rmItem.getFieldData('oxartnum') }}',
-                            'item_name':        '{{ rmItem.getFieldData('oxtitle') }}',
+                            'item_name':        '{{ rmItem.getFieldData('oxtitle')|raw }}',
                             'item_variant':     '{{ rmItem.getFieldData('oxvarselect') }}',
                             {% if gtmBasketItemCategory %}
                             'item_category':    '{{ gtmBasketItemCategory.getSplitCategoryArray(0, true) }}',
@@ -39,8 +39,8 @@
                     'debug_mode': 'true'
                     {% endif %}
                 });
-            {% endspaceless %}
-        {% endcapture %}
-        {{ script({ add: smarty.capture.d3_ga4_remove_from_cart, dynamic: __oxid_include_dynamic }) }}
+            {% endapply %}
+        {% endset %}
+        {{ script({ add: d3_ga4_remove_from_cart.__toString(), dynamic: __oxid_include_dynamic }) }}
     {% endif %}
 {% endblock %}

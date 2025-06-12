@@ -2,7 +2,7 @@
 {% if d3CmpBasket and d3CmpBasket.getAddToBasketDecision() and d3CmpBasket.d3GtmRequestedArticleLoadedByAnid() != "null" %}
   {% set oGtmProduct = d3CmpBasket.d3GtmRequestedArticleLoadedByAnid() %}
   {% set oGtmAmountArticlesAdded = d3CmpBasket.getD3GtmAddToCartAmountArticles() %}
-  {# $smarty.block.parent #}
+  {# twig.block.parent #}
   {# variable $oGtmProduct is passed from parent tempalte #}
   {% set d3PriceObject = oGtmProduct.getPrice() %}
   {% set gtmCurrency = oView.getActCurrency() %}
@@ -10,8 +10,8 @@
   {% set gtmCategory = oGtmProduct.getCategory() %}
 
   {% block d3_ga4_add_to_cart_list_block %}
-    {% capture name = "d3_ga4_add_to_cart_listtpl" %}
-      {% spaceless %}
+    {% set d3_ga4_add_to_cart_listtpl %}
+      {% apply spaceless %}
       dataLayer.push({"event": null, "eventLabel": null, "ecommerce": null});  /* Clear the previous ecommerce object. */
 
       {# ** Debug cases ** #}
@@ -20,7 +20,8 @@
       let iArtQuantity = $("{{ htmlIdAmountOfArticles }}").val();
       let iArtQuantityAdded = {{ oGtmAmountArticlesAdded }};
 
-      if(!iArtQuantity && (iArtQuantityAdded is same as(1)){)
+      if(!iArtQuantity && (iArtQuantityAdded is same as(1)){
+)
         iArtQuantity = 1;
       }else{
         iArtQuantity = iArtQuantityAdded;
@@ -36,9 +37,9 @@
           'items':      [
             {
               'item_id':        '{{ oGtmProduct.getFieldData('oxartnum') }}',
-              'item_name':      '{{ oGtmProduct.getFieldData('oxtitle') }}',
+              'item_name':      '{{ oGtmProduct.getFieldData('oxtitle')|raw }}',
               'price':          {{ d3PriceObject.getPrice() }},
-              'item_brand':     '{% if gtmManufacturer %}{{ gtmManufacturer.oxmanufacturers__oxtitle.value }}{% endif %}',
+              'item_brand':     '{% if gtmManufacturer %}{{ gtmManufacturer.getFieldData('oxtitle')|raw }}{% endif %}',
               'item_variant':   '{% if oGtmProduct.getFieldData('oxvarselect') %}{{ oGtmProduct.getFieldData('oxvarselect') }}{% endif %}',
               {% if gtmCategory %}
               'item_category':  '{{ gtmCategory.getSplitCategoryArray(0, true) }}',
@@ -54,8 +55,8 @@
         'debug_mode': 'true'
         {% endif %}
       });
-      {% endspaceless %}
-    {% endcapture %}
-    {{ script({ add: smarty.capture.d3_ga4_add_to_cart_listtpl, dynamic: __oxid_include_dynamic }) }}
+      {% endapply %}
+    {% endset %}
+    {{ script({ add: d3_ga4_add_to_cart_listtpl.__toString(), dynamic: __oxid_include_dynamic }) }}
   {% endblock %}
 {% endif %}

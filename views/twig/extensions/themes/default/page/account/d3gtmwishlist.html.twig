@@ -1,4 +1,4 @@
-{% capture append = "oxidBlock_content" %}
+{% set oxidBlock_content %}
     {% set template_title = "MY_GIFT_REGISTRY"|translate %}
     {% if not oView.getWishListUsers() and oView.getWishListSearchParam() %}
         {% set _statusMessage = "MESSAGE_SORRY_NO_GIFT_REGISTRY"|translate %}
@@ -37,8 +37,8 @@
     {% include '@d3googleanalytics4/event/add_to_cart.html.twig' with {htmlIdAmountOfArticles: '#amountToBasket'} %}
 
     {{ insert_tracker({title: template_title}) }}
-{% endcapture %}
-{% capture append = "oxidBlock_sidebar" %}
+{% endset %}
+{% set oxidBlock_sidebar %}
     {% include "page/account/inc/account_menu.html.twig" with {active_link: "wishlist"} %}
-{% endcapture %}
+{% endset %}
 {% include "layout/page.html.twig" with {sidebar: "Left"} %}
