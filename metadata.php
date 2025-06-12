@@ -88,25 +88,25 @@ $aModule = [
     ],
     'templates' => [
         // Event files that store the GA4 Event-Information
-        '@' . Constants::OXID_MODULE_ID . '/event/add_to_cart.tpl' => 'views/smarty/event/add_to_cart.tpl',
-        '@' . Constants::OXID_MODULE_ID . '/event/view_item.tpl' => 'views/smarty/event/view_item.tpl',
-        '@' . Constants::OXID_MODULE_ID . '/event/view_cart.tpl' => 'views/smarty/event/view_cart.tpl',
-        '@' . Constants::OXID_MODULE_ID . '/event/begin_checkout.tpl' => 'views/smarty/event/begin_checkout.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/add_to_cart.tpl'      => 'views/smarty/event/add_to_cart.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/view_item.tpl'        => 'views/smarty/event/view_item.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/view_cart.tpl'        => 'views/smarty/event/view_cart.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/begin_checkout.tpl'   => 'views/smarty/event/begin_checkout.tpl',
         '@' . Constants::OXID_MODULE_ID . '/event/add_payment_info.tpl' => 'views/smarty/event/add_payment_info.tpl',
-        '@' . Constants::OXID_MODULE_ID . '/event/purchase.tpl' => 'views/smarty/event/purchase.tpl',
-        '@' . Constants::OXID_MODULE_ID . '/event/view_item_list.tpl' => 'views/smarty/event/view_item_list.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/purchase.tpl'         => 'views/smarty/event/purchase.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/view_item_list.tpl'   => 'views/smarty/event/view_item_list.tpl',
         '@' . Constants::OXID_MODULE_ID . '/event/view_search_result.tpl' => 'views/smarty/event/view_search_result.tpl',
         '@' . Constants::OXID_MODULE_ID . '/event/remove_from_cart.tpl' => 'views/smarty/event/remove_from_cart.tpl',
 
         // complete overwritten file of OXID-Originals
         // the path of the template-name is the original path to the file in OXID-context from tpl/->
-        '@' . Constants::OXID_MODULE_ID . '/page/account/d3gtmnoticelist.tpl' => 'views/smarty/page/account/d3gtmnoticelist.tpl',
-        '@' . Constants::OXID_MODULE_ID . '/page/account/d3gtmrecommendationlist.tpl' => 'views/smarty/page/account/d3gtmrecommendationlist.tpl',
-        '@' . Constants::OXID_MODULE_ID . '/page/account/d3gtmwishlist.tpl' => 'views/smarty/page/account/d3gtmwishlist.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/d3gtmnoticelist.tpl'            => 'views/smarty/d3gtmnoticelist.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/d3gtmrecommendationlist.tpl'    => 'views/smarty/d3gtmrecommendationlist.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/d3gtmwishlist.tpl'              => 'views/smarty/d3gtmwishlist.tpl',
 
         // Admin Templates
-        '@' . Constants::OXID_MODULE_ID . '/admin/d3ga4uimain.tpl' => 'views/smarty/admin/d3googleanalytics4_main.tpl',
-        '@' . Constants::OXID_MODULE_ID . '/admin/d3ga4uiheaditem.tpl' => 'views/smarty/admin/d3googleanalytics4_headitem.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/admin/d3ga4uimain.tpl'          => 'views/smarty/admin/d3googleanalytics4_main.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/admin/d3ga4uiheaditem.tpl'      => 'views/smarty/admin/d3googleanalytics4_headitem.tpl',
     ],
     'blocks' => [
         // tag manager js
@@ -192,9 +192,6 @@ $aModule = [
             'file' => 'views/smarty/blocks/begin_checkout.tpl',
             'position' => 150,
         ],
-        // Add payment info
-        // We add it into checkout_order_main ( checkout/order.tpl ) to make sure a payment is actually added;
-        // we'll also do it like that in the future for add_shipping_info ( not planed yet )
         [
             'template' => 'page/checkout/order.tpl',
             'block' => 'checkout_order_main',
