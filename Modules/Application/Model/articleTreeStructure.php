@@ -33,10 +33,14 @@ trait articleTreeStructure
      */
     public function cleanUpTitle($title) :string
     {
-        // decode encoded characters
-        $title = html_entity_decode($title, ENT_QUOTES);
         // remove unwanted characters, e.g. Zoll "
         $charsToReplace = Registry::get(ViewConfig::class)->getCharsToReplaceInCategorTitles();
+        if (empty($charsToReplace)){
+            return $title;
+        }
+
+        // decode encoded characters
+        $title = html_entity_decode($title, ENT_QUOTES);
         $title = preg_replace('/[' . $charsToReplace . ']/', '', $title);
         // trim whitespace from both ends of the string
         $title = trim($title);
