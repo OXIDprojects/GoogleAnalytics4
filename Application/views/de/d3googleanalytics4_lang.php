@@ -39,11 +39,17 @@ return [
                                         <br>
                                         Ein einfaches anschalten dieser Funktion regelt noch <strong>nicht</strong> die völlige Funktionsweise
                                         aller beteiligten Instanzen; diese bedarf eine detailliertere Konfiguration!<br>",
-    'D3USEREALCATTITLES'        => "Für 'item_category'-Werte die Kategorie-Titel verwenden?",
-    'D3USEREALCATTITLES_HELP'   => "Für die 'item_category' Werte keine URL-Teile, sondern die Klartext-Kategorie-Titel verwenden, also z.B. 'Haarbürsten' statt 'haarbuersten'.",
+    'D3USEREALCATTITLES'        => "Klartext Kategorie-Titel statt URL-Teile verwenden",
+    'D3USEREALCATTITLES_HELP'   => "Für die 'item_category' Ereignis-Parameter keine URL-Teile, sondern die Klartext-Kategorie-Titel verwenden.<br> 
+                                    Also z.B. 'Haarbürsten' statt 'haarbuersten'.",
 
     'D3REPLACECHARS'            => "Zeichen ersetzen",
-    'D3REPLACECHARS_HELP'       => 'Hier alle Zeichen, die aus Kategorie-Titeln entfernt werden sollen, eintragen, also z.B. " um ein Zoll-Zeichen zu entfernen oder "0-9 um das Zollzeichen und alle Ziffern zu entfernen.',
+    'D3REPLACECHARS_HELP'       => 'Hier alle Zeichen, die aus Kategorie-Titeln entfernt werden sollen, eintragen, 
+                                    also z.B. " um ein Zoll-Zeichen zu entfernen oder "0-9 um das Zollzeichen 
+                                    und alle Ziffern zu entfernen.<br>
+                                    <br>
+                                    Eine Beispieleingabe könnte so aussehen: üöä0-9<br>
+                                    Damit wird <b>ü ö ä</b> und die Ziffern <b>0 1 2 3 4 5 6 7 8 9</b> entfernt.',
 
     // Use CMP?
     'D3CMPTABTITLE'             => 'Cookie Manager Einstellungen',
@@ -124,9 +130,9 @@ src="{Domain}?id={Container-ID}"
 </code>
                                                                         </pre>',
     'D3EXTENDEDCONFIG' => 'Erweiterte [GA4] Ereignisskonfiguration',
-    'D3VIEWITEMADDVARIANTS' => 'Varianten des Artikels mit auflisten ( Artikeldetailsseite/ "view_item"-Event)',
+    'D3VIEWITEMADDVARIANTS' => 'Varianten des Artikels in den Ereignis-Parameter auflisten',
     'D3VIEWITEMADDVARIANTS_HELP' => 'Wenn aktiviert, <u>werden die Varianten des Artikels</u> 
-        an das "view_item"-Event-Array angehangen. ( Artikeldetailsseite )<br>
+        in die "view_item" Ereignis-Parameter angehangen ( Artikeldetailsseite ).<br>
         Dies ist dann notwendig, wenn die Varianten nicht gesondert ausgewählt werden können und direkt von der Seite 
         des Hauptartikels in den Warenkorb gelegt werden können.
         <br>
