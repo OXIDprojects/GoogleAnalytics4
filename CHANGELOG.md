@@ -4,7 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.2...rel_2.x) - 2025-x
+## [unreleased](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.24.0.0...rel_2.x) - 2025-x
+
+## [2.24.0.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.2...2.24.0.0) - 2025-06-12
+### Fixed
+- return payment-object instead of string
+- missing semicolon
+### Added
+- 'item_oxid' parameter
+- 'item_brand' parameter
+- setting to use literal category-title
+- setting to replace chars in item_category-parameter
+- setting to list article-variants into parameter-array
 
 ## [2.23.0.2](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.1...2.23.0.2) - 2025-03-19
 ### Fixed
