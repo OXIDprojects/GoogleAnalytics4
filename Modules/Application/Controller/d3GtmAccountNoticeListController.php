@@ -6,7 +6,7 @@ use D3\GoogleAnalytics4\Application\Model\Constants;
 
 class d3GtmAccountNoticeListController extends d3GtmAccountNoticeListController_parent
 {
-    protected $_sThisTemplate = '@' . Constants::OXID_MODULE_ID . '/page/account/d3gtmnoticelist.tpl';
+    protected $_sThisTemplate = '@' . Constants::OXID_MODULE_ID . '/d3gtmnoticelist';
 
     public function render()
     {
