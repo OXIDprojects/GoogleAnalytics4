@@ -1,0 +1,7 @@
+{% extends "page/checkout/user.html.twig" %}
+
+{% block checkout_user_main %}
+    {{ parent() }}
+
+    {% include "@d3googleanalytics4/event/begin_checkout.html.twig" %}
+{% endblock %}
