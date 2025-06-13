@@ -4,7 +4,7 @@
     <title>{{ title }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset={{ charset }}">
     {% if isset(meta_refresh_sec, meta_refresh_url) %}
-        <meta http-equiv=Refresh content="{{ meta_refresh_sec }};URL={{ meta_refresh_url|replace("&amp;", "&") }}">
+        <meta http-equiv=Refresh content="{{ meta_refresh_sec }};URL={{ meta_refresh_url|replace({"&amp;": "&"})}}">
     {% endif %}
     <link rel="shortcut icon" href="{{ oViewConf.getBaseDir() }}favicon.ico">
 
@@ -42,7 +42,7 @@
             var ajaxpopup = null;
             function showDialog( sParams )
             {
-                ajaxpopup = window.open('{{ oViewConf.getSelfLink()|replace("&amp;", "&") }}'+sParams, 'ajaxpopup', 'width=850,height=680,scrollbars=yes,resizable=yes');
+                ajaxpopup = window.open('{{ oViewConf.getSelfLink()|replace({"&amp;": "&"})}}'+sParams, 'ajaxpopup', 'width=850,height=680,scrollbars=yes,resizable=yes');
             }
 
             function focusPopup()
