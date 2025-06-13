@@ -4,7 +4,7 @@
 
 {% block d3_ga4_view_item_block %}
     {% set d3_ga4_view_item %}
-        {% spaceless %}
+        {% apply spaceless %}
             dataLayer.push({"event": null, "eventLabel": null, "ecommerce": null});  /* Clear the previous ecommerce object. */
 
             dataLayer.push({
