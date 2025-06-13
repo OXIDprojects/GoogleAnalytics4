@@ -19,7 +19,7 @@
     <form name="d3gtmformedit" id="d3gtmformedit" action="{{ oViewConf.getSelfLink() }}" enctype="multipart/form-data" method="post">
         <div class="row">
             <div class="col-6">
-                {{ oViewConf.getHiddenSid() }}
+                {{ oViewConf.getHiddenSid()|raw }}
                 <input type="hidden" name="cl" value="{{ oViewConf.getActiveClassName() }}">
                 <input type="hidden" name="fnc" value="">
                 <input type="hidden" name="editlanguage" value="{{ editlanguage }}">
