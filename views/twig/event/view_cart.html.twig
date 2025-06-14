@@ -13,7 +13,7 @@
                         'ecommerce':
                         {
                             'actionField': "step: 1",
-                            'currency': "{{ d3ActCurrencyObject.name }}",
+                            'currency': "{{ oView.getActCurrency().name }}",
                             'value': {{ d3BasketPrice.getPrice() }},
                             'coupon':         '{% for key, sVoucher in oxcmp_basket.getVouchers() %}{{ sVoucher.sVoucherNr }}{% if not loop.last %}, {% endif %}{% endfor %}',
                             'items':

@@ -16,7 +16,7 @@
                     'ecommerce':
                     {
                         'actionField': "Payment-Info",
-                        'currency': "{{ currency.name }}",
+                        'currency': "{{ oView.getActCurrency().name }}",
                         'value': {{ gtmBasketPrice.getPrice() }},
                         'coupon':         '{% for key, sVoucher in oxcmp_basket.getVouchers() %}{{ sVoucher.sVoucherNr }}{% if not loop.last %}, {% endif %}{% endfor %}',
                         'items': [
