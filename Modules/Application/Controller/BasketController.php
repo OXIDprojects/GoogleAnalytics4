@@ -17,6 +17,8 @@ class BasketController extends BasketController_parent
     {
         $return = parent::render();
 
+		$this->addTplParam('d3ActCurrencyObject', Registry::getConfig()->getActShopCurrencyObject());
+		
         $this->d3GA4getRemovedArticlesListObject();
 
         return $return;
