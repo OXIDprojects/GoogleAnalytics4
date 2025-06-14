@@ -3,39 +3,37 @@
 {% set gtmManufacturer = gtmProduct.getManufacturer() %}
 
 {% block d3_ga4_view_item_block %}
-    {% set d3_ga4_view_item %}
-        {% apply spaceless %}
-            dataLayer.push({"event": null, "eventLabel": null, "ecommerce": null});  /* Clear the previous ecommerce object. */
+    {% set doNotShow %}{% apply spaceless %}
+        <script type="text/javascript">
+            {% set d3_ga4_view_item %}{% apply spaceless %}
+                dataLayer.push({"event": null, "eventLabel": null, "ecommerce": null});
 
-            dataLayer.push({
-                'event': 'view_item',
-                'eventLabel':'Product View',
-                'ecommerce':
-                {
-                    'currency': '{{ currency.name }}',
-                    'items':
-                        [
-                            {
-                                'item_name': '{{ gtmProduct.getFieldData('oxtitle')|raw }}',
-                                'item_id': '{{ gtmProduct.getFieldData("oxartnum") }}',
-                                'item_brand': '{% if gtmManufacturer %}{{ gtmManufacturer.getFieldData('oxtitle')|raw }}{% endif %}',
-                                'item_variant': '{% if gtmProduct.getFieldData("oxvarselect") %}{{ gtmProduct.getFieldData("oxvarselect") }}{% endif %}',
-                                {% if gtmCategory %}
+                dataLayer.push({
+                    'event': 'view_item',
+                    'eventLabel':'Product View',
+                    'ecommerce': {
+                        'currency': '{{ currency.name }}',
+                        'items': [{
+                            'item_name': '{{ gtmProduct.getFieldData('oxtitle')|raw }}',
+                            'item_id': '{{ gtmProduct.getFieldData("oxartnum") }}',
+                            'item_brand': '{% if gtmManufacturer %}{{ gtmManufacturer.getFieldData('oxtitle')|raw }}{% endif %}',
+                            'item_variant': '{% if gtmProduct.getFieldData("oxvarselect") %}{{ gtmProduct.getFieldData("oxvarselect") }}{% endif %}',
+                            {% if gtmCategory %}
                                 'item_category':  '{{ gtmCategory.getSplitCategoryArray(0, true) }}',
                                 'item_category_2':'{{ gtmCategory.getSplitCategoryArray(1, true) }}',
                                 'item_category_3':'{{ gtmCategory.getSplitCategoryArray(2, true) }}',
                                 'item_category_4':'{{ gtmCategory.getSplitCategoryArray(3, true) }}',
                                 'item_list_name':'{{ gtmCategory.getSplitCategoryArray() }}',
-                                {% endif %}
-                                {% set d3PriceObject = gtmProduct.getPrice() %}
+                            {% endif %}
+                            {% set d3PriceObject = gtmProduct.getPrice() %}
                                 'price': {{ d3PriceObject.getPrice() }}
-                            }
-                        ]
-                }{% if oViewConf.isDebugModeOn() %},
-                'debug_mode': 'true'
-                {% endif %}
-            });
-        {% endapply %}
-    {% endset %}
+                        }]
+                    }{% if oViewConf.isDebugModeOn() %},
+                        'debug_mode': 'true'
+                    {% endif %}
+                });
+            {% endapply %}{% endset %}
+        </script>
+    {% endapply %}{% endset %}
     {{ script({ add: d3_ga4_view_item.__toString(), dynamic: __oxid_include_dynamic }) }}
 {% endblock %}
