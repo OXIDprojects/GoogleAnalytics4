@@ -54,23 +54,6 @@
                                 {{ translate({ ident: "D3USEGOOGLECONSENTMODE" }) }}{% include "inputhelp.html.twig" with {'sHelpId': help_id("D3USEGOOGLECONSENTMODE_HELP"), 'sHelpText': help_text("D3USEGOOGLECONSENTMODE_HELP")} %}
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_blUseRealCategoyTitles" name="editval[bool][_blUseRealCategoyTitles]"
-                                   {% if d3ViewObject.d3GetModuleConfigParam('_blUseRealCategoyTitles') %}checked{% endif %}>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                {{ translate({ ident: "D3USEREALCATTITLES" }) }}{% include "inputhelp.html.twig" with {'sHelpId': help_id("D3USEREALCATTITLES_HELP"), 'sHelpText': help_text("D3USEREALCATTITLES_HELP")} %}
-                            </label>
-                        </div>
-                        <div class="mb-3">
-                            <div class="input-group w-50">
-                                <span class="input-group-text"
-                                      id="basic-addon3">{{ translate({ ident: "D3REPLACECHARS" }) }}</span>
-                                <input type="text" class="form-control" id="_sReplaceChars"
-                                       name="editval[str][_sReplaceChars]" aria-describedby="basic-addon3"
-                                       value='{{ d3ViewObject.d3GetModuleConfigParam('_sReplaceChars') }}'/>
-                            </div>
-                            <div class="text-muted">{{ translate({ ident: "D3REPLACECHARS_HELP" }) }}</div>
-                        </div>
                     </div>
                     <button type="submit" name="save" class="btn btn-light" onClick="Javascript:document.d3gtmformedit.fnc.value='save'">{{ translate({ ident: "GENERAL_SAVE" }) }}</button>
                 </div>
@@ -162,6 +145,45 @@
                                 <button type="submit" name="save" class="btn btn-light w-100" onClick="Javascript:document.d3gtmformedit.fnc.value='save'">{{ translate({ ident: "GENERAL_SAVE" }) }}</button>
                             </div>
                         </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-viewitemvariants" aria-expanded="false" aria-controls="panelsStayOpen-viewitemvariants">
+                                    {{ translate({ ident: "D3EXTENDEDCONFIG" }) }}
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-viewitemvariants" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="editval[bool][_blViewItemAddVariants]" {% if d3ViewObject.d3GetModuleConfigParam('_blViewItemAddVariants') %}checked{% endif %} id="blGA4enab">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            {{ translate({ ident: "D3VIEWITEMADDVARIANTS" }) }}{% include "inputhelp.html.twig" with {'sHelpId': help_id("D3VIEWITEMADDVARIANTS_HELP"), 'sHelpText': help_text("D3VIEWITEMADDVARIANTS_HELP")} %}
+                                        </label>
+                                    </div>
+                                    <hr>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="_blUseRealCategoyTitles"
+                                               name="editval[bool][_blUseRealCategoyTitles]"
+                                               {% if d3ViewObject.d3GetModuleConfigParam('_blUseRealCategoyTitles') %}checked{% endif %}>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            {{ translate({ ident: "D3USEREALCATTITLES" }) }}{% include "inputhelp.html.twig" with {'sHelpId': help_id("D3USEREALCATTITLES_HELP"), 'sHelpText': help_text("D3USEREALCATTITLES_HELP")} %}
+                                        </label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="input-group w-50">
+                                        <span class="input-group-text"
+                                              id="basic-addon3">{{ translate({ ident: "D3REPLACECHARS" }) }}</span>
+                                            <input type="text" class="form-control" id="_sReplaceChars"
+                                                   name="editval[str][_sReplaceChars]" aria-describedby="basic-addon3"
+                                                   value='{{ d3ViewObject.d3GetModuleConfigParam('_sReplaceChars') }}'/>
+                                        </div>
+                                        <div class="text-muted">{{ translate({ ident: "D3REPLACECHARS_HELP" }) }}</div>
+                                    </div>
+                                </div>
+                                <button type="submit" name="save" class="btn btn-light w-100" onClick="Javascript:document.d3gtmformedit.fnc.value='save'">{{ translate({ ident: "GENERAL_SAVE" }) }}</button>
+                            </div>
+                        </div>
+
                         {% if d3ViewConfObject.d3IsUsercentricsCMPChosen() %}
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
@@ -207,22 +229,6 @@
                             </div>
                         {% endif %}
                     </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card mb-5">
-                    <div class="card-header">
-                        {{ translate({ ident: "D3EXTENDEDCONFIG" }) }}
-                    </div>
-                    <div class="card-body">
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" name="editval[bool][_blViewItemAddVariants]" {% if d3ViewObject.d3GetModuleConfigParam('_blViewItemAddVariants') %}checked{% endif %} id="blGA4enab">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                {{ translate({ ident: "D3VIEWITEMADDVARIANTS" }) }}{% include "inputhelp.html.twig" with {'sHelpId': help_id("D3VIEWITEMADDVARIANTS_HELP"), 'sHelpText': help_text("D3VIEWITEMADDVARIANTS_HELP")} %}
-                            </label>
-                        </div>
-                    </div>
-                    <button type="submit" name="save" class="btn btn-light" onClick="Javascript:document.d3gtmformedit.fnc.value='save'">[{oxmultilang ident="GENERAL_SAVE"}]</button>
                 </div>
             </div>
         </div>
