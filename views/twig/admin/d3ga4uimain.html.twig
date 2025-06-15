@@ -210,7 +210,7 @@
                                         </div>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text w-25" id="basic-addon3">{{ translate({ ident: "D3USRCNTRCSCFG_STD_CNST" }) }}</span>
-                                            <textarea name="editval[str][_sMeasurementCapabilities]" class="form-control" rows="15">{{ d3ViewObject.d3GetModuleConfigParam('_sDefaultMeasurementCapabilities') }}</textarea>
+                                            <textarea name="editval[str][_sMeasurementCapabilities]" class="form-control" rows="15">{{ d3ViewObject.d3GetModuleConfigParam('_sMeasurementCapabilities') }}</textarea>
                                         </div>
 
                                         <div class="form-check">
@@ -221,7 +221,7 @@
                                         </div>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text w-25" id="basic-addon3">{{ translate({ ident: "D3USRCNTRCSCFG_CNSTMDE_API" }) }}</span>
-                                            <textarea name="editval[str][_sUsercentricsConsentModeApi]" class="form-control" rows="40">{{ d3ViewObject.d3GetModuleConfigParam('_sDefaultUsercentricsConsentModeApi') }}</textarea>
+                                            <textarea name="editval[str][_sUsercentricsConsentModeApi]" class="form-control" rows="40">{{ d3ViewObject.d3GetModuleConfigParam('_sUsercentricsConsentModeApi') }}</textarea>
                                         </div>
                                     </div>
                                     <button type="submit" name="save" class="btn btn-light w-100" onClick="Javascript:document.d3gtmformedit.fnc.value='save'">{{ translate({ ident: "GENERAL_SAVE" }) }}</button>
