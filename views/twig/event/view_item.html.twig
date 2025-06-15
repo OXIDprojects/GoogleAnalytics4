@@ -13,7 +13,8 @@
                     'eventLabel':'Product View',
                     'ecommerce': {
                         'currency': '{{ currency.name }}',
-                        'items': [{
+                        'items': [
+                            {
                             'item_oxid': '{{ gtmProduct.getFieldData("oxid") }}',
                             'item_name': '{{ gtmProduct.getFieldData('oxtitle')|raw }}',
                             'item_id': '{{ gtmProduct.getFieldData("oxartnum") }}',
@@ -28,7 +29,26 @@
                             {% endif %}
                             {% set d3PriceObject = gtmProduct.getPrice() %}
                                 'price': {{ d3PriceObject.getPrice() }}
-                        }]
+                        }{% if d3ViewObject.d3GetModuleConfigParam('_blViewItemAddVariants') %}
+                            {% for gtmProduct.getVariants() in oVariant %}
+                            , {
+                                'item_name':    '{{ oVariant.getRawFieldData("oxtitle") }}',
+                                'item_id':      '{{ oVariant.getFieldData("oxartnum") }}',
+                                'item_brand': '{% if gtmManufacturer %}{{ gtmManufacturer.getFieldData('oxtitle')|raw }}{% endif %}',
+                                'item_variant': '{% if oVariant.getFieldData("oxvarselect") %}{{ oVariant.getFieldData("oxvarselect") }}{% endif %}',
+                                {% if gtmCategory %}
+                                    'item_category':  '{{ gtmCategory.getSplitCategoryArray(0, true) }}',
+                                    'item_category2':'{{ gtmCategory.getSplitCategoryArray(1, true) }}',
+                                    'item_category3':'{{ gtmCategory.getSplitCategoryArray(2, true) }}',
+                                    'item_category4':'{{ gtmCategory.getSplitCategoryArray(3, true) }}',
+                                    'item_list_name':'{{ gtmCategory.getSplitCategoryArray() }}',
+                                {% endif %}
+                                {% set d3PriceObject = oVariant.getPrice() %}
+                                'price': {{ d3PriceObject.getPrice() }}
+            }
+            {% endfor %}
+                {% endif %}
+            ]
                     }{% if oViewConf.isDebugModeOn() %},
                         'debug_mode': 'true'
                     {% endif %}
