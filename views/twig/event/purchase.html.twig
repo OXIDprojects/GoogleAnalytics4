@@ -28,18 +28,20 @@
                                 {% set gtmPurchaseItemPriceObject = gtmBasketItem.getPrice() %}
                                 {% set gtmPurchaseItem = gtmBasketItem.getArticle() %}
                                 {% set gtmPurchaseItemCategory = gtmPurchaseItem.getCategory() %}
-
+                                {% set gtmManufacturer = gtmBasketItem.getManufacturer() %}
                                 {
+                                    'item_oxid': '{{ gtmProduct.getFieldData("oxid") }}',
                                     'item_id':          '{{ gtmBasketItem.getFieldData("oxartnum") }}',
                                     'item_name':        '{{ gtmBasketItem.getFieldData('oxtitle')|raw }}',
                                     'affiliation':      '{{ gtmBasketItem.getFieldData('oxtitle')|raw }}',
                                     'coupon':           '{% for gtmOrderVoucher in gtmOrderVouchers %}{{ gtmOrderVoucher }}{% if not loop.last %}, {% endif %}{% endfor %}',
                                     'item_variant':     '{{ gtmBasketItem.getFieldData("oxselvariant") }}',
+                                    'item_brand': '{% if gtmManufacturer %}{{ gtmManufacturer.getRawFieldData('oxtitle') }}{% endif %}',
                                     {% if gtmPurchaseItemCategory %}
                                     'item_category':    '{{ gtmPurchaseItemCategory.getSplitCategoryArray(0, true) }}',
-                                    'item_category_2':  '{{ gtmPurchaseItemCategory.getSplitCategoryArray(1, true) }}',
-                                    'item_category_3':  '{{ gtmPurchaseItemCategory.getSplitCategoryArray(2, true) }}',
-                                    'item_category_4':  '{{ gtmPurchaseItemCategory.getSplitCategoryArray(3, true) }}',
+                                    'item_category2':  '{{ gtmPurchaseItemCategory.getSplitCategoryArray(1, true) }}',
+                                    'item_category3':  '{{ gtmPurchaseItemCategory.getSplitCategoryArray(2, true) }}',
+                                    'item_category4':  '{{ gtmPurchaseItemCategory.getSplitCategoryArray(3, true) }}',
                                     'item_list_name':   '{{ gtmPurchaseItemCategory.getSplitCategoryArray() }}',
                                     {% endif %}
                                     'price':            {{ gtmPurchaseItemPriceObject.getPrice() }},
@@ -51,7 +53,7 @@
                         }{% if oViewConf.isDebugModeOn() %},
                             'debug_mode': 'true'
                         {% endif %}
-                    })
+                    });
                 {% endapply %}
             {% endset %}
             {{ script({ add: d3_ga4_purchase.__toString(), dynamic: __oxid_include_dynamic }) }}

@@ -19,15 +19,18 @@
                                     {% for rmItemindex, rmItem in toRemoveArticles.getArray() %}
                                         {% set d3oItemPrice = rmItem.getPrice() %}
                                         {% set gtmBasketItemCategory = rmItem.getCategory() %}
+                                        {% set gtmManufacturer = gtmBasketItem.getManufacturer() %}
                                         {
+                                        'item_oxid': '{{ gtmProduct.getFieldData("oxid") }}',
                                         'item_id':          '{{ rmItem.getFieldData('oxartnum') }}',
                                         'item_name':        '{{ rmItem.getFieldData('oxtitle')|raw }}',
                                         'item_variant':     '{{ rmItem.getFieldData('oxvarselect') }}',
+                                        'item_brand': '{% if gtmManufacturer %}{{ gtmManufacturer.getRawFieldData('oxtitle') }}{% endif %}',
                                         {% if gtmBasketItemCategory %}
                                             'item_category':    '{{ gtmBasketItemCategory.getSplitCategoryArray(0, true) }}',
-                                            'item_category_2':  '{{ gtmBasketItemCategory.getSplitCategoryArray(1, true) }}',
-                                            'item_category_3':  '{{ gtmBasketItemCategory.getSplitCategoryArray(2, true) }}',
-                                            'item_category_4':  '{{ gtmBasketItemCategory.getSplitCategoryArray(3, true) }}',
+                                            'item_category2':  '{{ gtmBasketItemCategory.getSplitCategoryArray(1, true) }}',
+                                            'item_category3':  '{{ gtmBasketItemCategory.getSplitCategoryArray(2, true) }}',
+                                            'item_category4':  '{{ gtmBasketItemCategory.getSplitCategoryArray(3, true) }}',
                                             'item_list_name':   '{{ gtmBasketItemCategory.getSplitCategoryArray() }}',
                                         {% endif %}
                                         'price':            {{ d3oItemPrice.getPrice() }},
