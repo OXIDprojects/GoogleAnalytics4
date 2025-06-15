@@ -13,7 +13,7 @@
                     'event': 'begin_checkout',
                     'eventLabel':'Begin of checkout',
                     'ecommerce': {
-                        'actionField': "Begin",
+                        'actionField': "Begin Checkout - Step 2",
                         'currency': "{{ gtmCurrency.name }}",
                         'value': {{ d3BasketPrice.getPrice() }},
                         'coupon':         '{% for key, sVoucher in oxcmp_basket.getVouchers() %}{{ sVoucher.sVoucherNr }}{% if not loop.last %}, {% endif %}{% endfor %}',

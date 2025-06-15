@@ -5,3 +5,9 @@
 
     {% include "@d3googleanalytics4/event/begin_checkout.html.twig" %}
 {% endblock %}
+
+{% block checkout_user %}
+    {{ parent() }}
+
+    {% include "@d3googleanalytics4/event/begin_checkout.html.twig" %}
+{% endblock %}
