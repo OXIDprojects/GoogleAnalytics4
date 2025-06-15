@@ -31,10 +31,10 @@
                                 'price': {{ d3PriceObject.getPrice() }}
                             }
                         ]
-                        {% if d3ViewObject.d3GetModuleConfigParam('_blViewItemAddVariants') %}
+                        {% if oViewConf.d3GetModuleConfigParam('_blViewItemAddVariants') %}
                         ,'item_variants':
                             [
-                                {% for gtmProduct.getVariants() in oVariant %}
+                                {% for oVariant in gtmProduct.getVariants() %}
                                 {
                                     'item_name':    '{{ oVariant.getRawFieldData("oxtitle") }}',
                                     'item_id':      '{{ oVariant.getFieldData("oxartnum") }}',
@@ -49,7 +49,7 @@
                                     {% endif %}
                                     {% set d3PriceObject = oVariant.getPrice() %}
                                     'price': {{ d3PriceObject.getPrice() }}
-                                }
+                                },
                                 {% endfor %}
                             ]
                         {% endif %}

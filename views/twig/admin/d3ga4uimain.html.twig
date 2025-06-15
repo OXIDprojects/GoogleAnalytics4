@@ -155,7 +155,7 @@
                             <div id="panelsStayOpen-viewitemvariants" class="accordion-collapse collapse">
                                 <div class="accordion-body">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" name="editval[bool][_blViewItemAddVariants]" {% if d3ViewObject.d3GetModuleConfigParam('_blViewItemAddVariants') %}checked{% endif %} id="blGA4enab">
+                                        <input class="form-check-input" type="checkbox" value="" name="editval[bool][_blViewItemAddVariants]" {% if d3ViewObject.d3GetModuleConfigParam('_blViewItemAddVariants') %}checked{% endif %} id="_blViewItemAddVariants">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             {{ translate({ ident: "D3VIEWITEMADDVARIANTS" }) }}{% include "inputhelp.html.twig" with {'sHelpId': help_id("D3VIEWITEMADDVARIANTS_HELP"), 'sHelpText': help_text("D3VIEWITEMADDVARIANTS_HELP")} %}
                                         </label>
