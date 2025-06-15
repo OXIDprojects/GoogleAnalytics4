@@ -138,5 +138,5 @@ src="{Domain}?id={Container-ID}"
         <br>
         <br>
         Standardmäßig werden keine Varianten an das "view_item"-Event-Array angehangen.<br>
-        Je nach Artikel kann es hier zu wesentlicher vergrößerung kommen.',
-);
+        Je nach Artikel kann es hier zu wesentlicher vergrößerung kommen.'
+];
