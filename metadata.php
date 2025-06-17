@@ -199,6 +199,91 @@ $aModule = [
             'position' => 150,
         ],
     ],
+    'settings' => [
+        /* String values */
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sContainerID',
+            'type'  => 'str',
+            'value' => 'GTM-'
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sControlParameter',
+            'type'  => 'str',
+            'value' => ''
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sServersidetagging_js',
+            'type'  => 'str',
+            'value' => 'https://www.googletagmanager.com/gtm.js'
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sServersidetagging_nojs',
+            'type'  => 'str',
+            'value' => 'https://www.googletagmanager.com/ns.html'
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sReplaceChars',
+            'type'  => 'str',
+            'value' => ''
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sMeasurementCapabilities',
+            'type'  => 'str',
+            'value' => ''
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sUsercentricsConsentModeApi',
+            'type'  => 'str',
+            'value' => 'Testshop'
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_HAS_STD_MANAGER',
+            'type'  => 'str',
+            'value' => 'externalService'
+        ],
+
+        /* Bool values */
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableGa4',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableDebug',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableConsentMode',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableOwnCookieManager',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blViewItemAddVariants',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blUseRealCategoyTitles',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableMeasurementCapabilities',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableUsercentricsConsentModeApi',
+            'type'  => 'bool',
+            'value' => false
+        ]
+    ],
     'events' => [
         'onActivate' => '\D3\GoogleAnalytics4\Setup\Events::onActivate',
         'onDeactivate' => '\D3\GoogleAnalytics4\Setup\Events::onDeactivate',
