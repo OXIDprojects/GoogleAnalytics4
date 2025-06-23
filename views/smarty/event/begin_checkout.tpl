@@ -1,5 +1,11 @@
 [{*$oxcmp_basket|get_class_methods|dumpvar*}]
 
+/* ToDo:
+- erst feuern, wenn
+    -> angemeldet wurde
+    -> Bestellung ohne Registrieren
+*/
+
 [{assign var="d3BasketPrice" value=$oxcmp_basket->getPrice()}]
 [{assign var="d3BasketObject" value=$oxcmp_basket}]
 [{assign var='gtmCartArticles' value=$d3BasketObject->getBasketArticles()}]
