@@ -7,8 +7,12 @@ namespace D3\GoogleAnalytics4\Application\Controller\Admin;
 use D3\GoogleAnalytics4\Application\Model\Constants;
 use D3\GoogleAnalytics4\Application\Model\ManagerHandler;
 use D3\GoogleAnalytics4\Application\Model\ManagerTypes;
+use OxidEsales\Eshop\Application\Controller\Admin\ModuleConfiguration;
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\Eshop\Core\ViewConfig;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
 
 class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controller\Admin\AdminDetailsController
 {
@@ -55,25 +59,64 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
     }
 
     /**
+     * @return ModuleSettingService
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function d3GetModuleSettings() :ModuleSettingService
+    {
+        return ContainerFactory::getInstance()
+            ->getContainer()
+            ->get(ModuleSettingServiceInterface::class);
+    }
+
+    /**
+     * @param string $sSettingName
+     * @return bool
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function d3SettingExists(string $sSettingName) :bool
+    {
+        return $this->d3GetModuleSettings()
+            ->exists(Constants::OXID_MODULE_ID.$sSettingName, Constants::OXID_MODULE_ID);
+    }
+
+    /**
      * @param array $aParams
      * @return void
      */
     protected function d3SaveShopConfigVars(array $aParams)
     {
-        $oConfig = Registry::getConfig();
         foreach ($aParams as $sConfigType => $aConfigParams) {
-            foreach ($aConfigParams as $sParamName => $sParamValue){
-                if($this->d3GetModuleConfigParam($sParamName) !== $sParamValue){
-                    $oConfig->saveShopConfVar(
-                        $sConfigType,
-                        Constants::OXID_MODULE_ID.$sParamName,
-                        $sParamValue,
-                        $oConfig->getShopId(),
-                        Constants::OXID_MODULE_ID
-                    );
+            foreach ($aConfigParams as $sSettingName => $sSettingValue){
+                $oModConfig = oxNew(ModuleConfiguration::class);
+
+                /* ToDo:
+                 * in the array is a select field, we must convert it to str or check if the "saveCollection" is the select save method?
+                 *
+                 * */
+
+                //if($this->d3GetModuleConfigParam($sSettingName) !== $sSettingValue){}
+                if ($this->d3SettingExists($sSettingName)){
+                    $sSettingName = Constants::OXID_MODULE_ID.$sSettingName;
+                    switch ($sConfigType){
+                       case 'str':
+                           $this->d3GetModuleSettings()->saveString($sSettingName, $sSettingValue,Constants::OXID_MODULE_ID);
+                           break;
+                       case 'bool':
+                           $this->d3GetModuleSettings()->saveBoolean($sSettingName, $sSettingValue,Constants::OXID_MODULE_ID);
+                           break;
+                       default:
+                           Registry::getLogger()->error(
+                               'No given datatype defined!',
+                               [Constants::OXID_MODULE_ID." -> ".__METHOD__.": ".__LINE__." with '".$sSettingName."'"]
+                           );
+                   }
                 }
             }
         }
+        die;
     }
 
     /**
