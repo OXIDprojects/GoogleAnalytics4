@@ -8,9 +8,13 @@ use D3\GoogleAnalytics4\Application\Model\Constants;
 use D3\GoogleAnalytics4\Application\Model\ManagerHandler;
 use D3\GoogleAnalytics4\Application\Model\ManagerTypes;
 use OxidEsales\Eshop\Application\Controller\Admin\ModuleConfiguration;
+use OxidEsales\Eshop\Core\Module\Module;
 use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\Eshop\Core\Str;
 use OxidEsales\Eshop\Core\ViewConfig;
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\Bridge\ModuleConfigurationDaoBridge;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\Bridge\ModuleConfigurationDaoBridgeInterface;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
 
@@ -27,7 +31,97 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
         $this->addTplParam('d3ManagerTypeArray', oxNew(ManagerTypes::class)->getManagerList());
         $this->addTplParam('d3CurrentCMP', oxNew(ManagerHandler::class)->getActManager());
 
+        $tmpArray = [];
+
+        try {
+            $moduleConfiguration = ContainerFactory::getInstance()
+                ->getContainer()
+                ->get(ModuleConfigurationDaoBridgeInterface::class)
+                ->get(Constants::OXID_MODULE_ID);
+
+            if (!empty($moduleConfiguration->getModuleSettings())) {
+                $formatModuleSettings = $this
+                    ->d3FormatModuleSettingsForTemplate($moduleConfiguration->getModuleSettings());
+
+                $tmpArray["var_constraints"] = $formatModuleSettings['constraints'];
+                $tmpArray["var_grouping"] = $formatModuleSettings['grouping'];
+
+                foreach ($this->_aConfParams as $sType => $sParam) {
+                    $tmpArray[$sParam] = $formatModuleSettings['vars'][$sType] ?? null;
+                }
+            }
+        } catch (\Throwable $throwable) {
+            Registry::getUtilsView()->addErrorToDisplay($throwable);
+            Registry::getLogger()->error($throwable->getMessage());
+        }
+
+        $module = oxNew(Module::class);
+        $module->load(Constants::OXID_MODULE_ID);
+
+        dumpVar($module->getModuleData()['settings']);
+        echo "<hr><hr><hr><hr><hr><hr>";
+        dumpVar($tmpArray);
+        die;
+
         return $return;
+    }
+
+    private function d3FormatModuleSettingsForTemplate(array $moduleSettings): array
+    {
+        $confVars = [
+            'bool'     => [],
+            'str'      => [],
+            'arr'      => [],
+            'aarr'     => [],
+            'select'   => [],
+            'password' => [],
+        ];
+        $constraints = [];
+        $grouping = [];
+
+        foreach ($moduleSettings as $setting) {
+            $name = $setting->getName();
+            $valueType = $setting->getType();
+            $value = null;
+
+            if ($setting->getValue() !== null) {
+                switch ($setting->getType()) {
+                    case 'arr':
+                        $value = $this->arrayToMultiline($setting->getValue());
+                        break;
+                    case 'aarr':
+                        $value = $this->aarrayToMultiline($setting->getValue());
+                        break;
+                    case 'bool':
+                        $value = filter_var($setting->getValue(), FILTER_VALIDATE_BOOLEAN);
+                        break;
+                    default:
+                        $value = $setting->getValue();
+                        break;
+                }
+                $value = Str::getStr()->htmlentities($value);
+            }
+
+            $group = $setting->getGroupName();
+
+
+            $confVars[$valueType][$name] = $value;
+            $constraints[$name] = $setting->getConstraints() ?? '';
+
+            if ($group) {
+                if (!isset($grouping[$group])) {
+                    $grouping[$group] = [$name => $valueType];
+                } else {
+                    $grouping[$group][$name] = $valueType;
+                }
+            }
+        }
+
+        return [
+            'vars'        => $confVars,
+            'constraints' => $constraints,
+            'grouping'    => $grouping,
+        ];
     }
 
     public function save()
@@ -90,33 +184,37 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
     {
         foreach ($aParams as $sConfigType => $aConfigParams) {
             foreach ($aConfigParams as $sSettingName => $sSettingValue){
-                $oModConfig = oxNew(ModuleConfiguration::class);
+                try {
+                    //if($this->d3GetModuleConfigParam($sSettingName) !== $sSettingValue){}
+                    if ($this->d3SettingExists($sSettingName)){
+                        $sSettingName = Constants::OXID_MODULE_ID.$sSettingName;
 
-                /* ToDo:
-                 * in the array is a select field, we must convert it to str or check if the "saveCollection" is the select save method?
-                 *
-                 * */
+                        // converting select to str
+                        if ($sConfigType === "select"){
+                            $sConfigType = "str";
+                        }
 
-                //if($this->d3GetModuleConfigParam($sSettingName) !== $sSettingValue){}
-                if ($this->d3SettingExists($sSettingName)){
-                    $sSettingName = Constants::OXID_MODULE_ID.$sSettingName;
-                    switch ($sConfigType){
-                       case 'str':
-                           $this->d3GetModuleSettings()->saveString($sSettingName, $sSettingValue,Constants::OXID_MODULE_ID);
-                           break;
-                       case 'bool':
-                           $this->d3GetModuleSettings()->saveBoolean($sSettingName, $sSettingValue,Constants::OXID_MODULE_ID);
-                           break;
-                       default:
-                           Registry::getLogger()->error(
-                               'No given datatype defined!',
-                               [Constants::OXID_MODULE_ID." -> ".__METHOD__.": ".__LINE__." with '".$sSettingName."'"]
-                           );
-                   }
+                        switch ($sConfigType){
+                           case 'str':
+                               $this->d3GetModuleSettings()->saveString($sSettingName, $sSettingValue,Constants::OXID_MODULE_ID);
+                               break;
+                           case 'bool':
+                               $this->d3GetModuleSettings()->saveBoolean($sSettingName, $sSettingValue,Constants::OXID_MODULE_ID);
+                               break;
+                           default:
+                               Registry::getLogger()->error(
+                                   'No given datatype defined!',
+                                   [Constants::OXID_MODULE_ID." -> ".__METHOD__.": ".__LINE__." with '".$sSettingName."'"]
+                               );
+                       }
                 }
+                } catch (\Throwable $throwable) {
+                    Registry::getUtilsView()->addErrorToDisplay($throwable);
+                    Registry::getLogger()->error($throwable->getMessage());
+                }
+
             }
         }
-        die;
     }
 
     /**
@@ -125,6 +223,42 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
      */
     public function d3GetModuleConfigParam(string $configParamName)
     {
+        $container = ContainerFactory::getInstance()->getContainer();
+        $moduleConfiguration = $container->get(ModuleConfigurationDaoBridgeInterface::class)->get($moduleId);
+
+
+
         return Registry::get(ViewConfig::class)->d3GetModuleConfigParam($configParamName);
+    }
+
+    private function d3convertSettingsToArray(\OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\DataObject\ModuleConfiguration $moduleConfiguration): array
+    {
+        $data = [];
+
+        foreach ($moduleConfiguration->getModuleSettings() as $index => $setting) {
+            if ($setting->getGroupName()) {
+                $data[$index]['group'] = $setting->getGroupName();
+            }
+
+            if ($setting->getName()) {
+                $data[$index]['name'] = $setting->getName();
+            }
+
+            if ($setting->getType()) {
+                $data[$index]['type'] = $setting->getType();
+            }
+
+            $data[$index]['value'] = $setting->getValue();
+
+            if (!empty($setting->getConstraints())) {
+                $data[$index]['constraints'] = $setting->getConstraints();
+            }
+
+            if ($setting->getPositionInGroup() > 0) {
+                $data[$index]['position'] = $setting->getPositionInGroup();
+            }
+        }
+
+        return $data;
     }
 }
