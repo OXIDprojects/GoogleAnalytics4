@@ -28,7 +28,7 @@
                                 {% set gtmPurchaseItemPriceObject = gtmBasketItem.getPrice() %}
                                 {% set gtmPurchaseItem = gtmBasketItem.getArticle() %}
                                 {% set gtmPurchaseItemCategory = gtmPurchaseItem.getCategory() %}
-                                {% set gtmManufacturer = gtmBasketItem.getManufacturer() %}
+                                {% set gtmManufacturer = gtmBasketItem.getArticle().getManufacturer() %}
                                 {
                                     'item_oxid': '{{ gtmProduct.getFieldData("oxid") }}',
                                     'item_id':          '{{ gtmBasketItem.getFieldData("oxartnum") }}',
