@@ -22,7 +22,11 @@ use OxidEsales\Eshop\Core\Config;
 use OxidEsales\Eshop\Application\Model\User;
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\Bridge\ModuleConfigurationDaoBridgeInterface;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\Exception\ModuleConfigurationNotFoundException;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Setting\Setting;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Setup\Bridge\ModuleActivationBridgeInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -166,7 +170,7 @@ class ViewConfig extends ViewConfig_parent
     public function isGA4enabled()
     {
         if ($this->blGA4enabled === null) {
-            $this->blGA4enabled = $this->d3GetModuleConfigParam("_blEnableGA4");
+            $this->blGA4enabled = $this->d3GetModuleConfigParam("_blEnableGa4");
         }
 
         return $this->blGA4enabled;
@@ -251,16 +255,51 @@ class ViewConfig extends ViewConfig_parent
     {
         return $this->d3GetModuleConfigParam('_sServersidetagging_nojs') ?: "";
     }
-
-    /**
-     * @param string $configParamName
-     * @return mixed
-     */
-    public function d3GetModuleConfigParam(string $configParamName)
+	
+	/**
+	 * @param string $configParamName
+	 * @param bool $displayThrowable
+	 * @return bool|object|string
+	 */
+    public function d3GetModuleConfigParam(string $configParamName, bool $displayThrowable = false)
     {
-        return Registry::getConfig()->getShopConfVar(Constants::OXID_MODULE_ID.$configParamName, null, Constants::OXID_MODULE_ID);
+		try {
+			return $this->d3GetGa4ModuleConfigurationBridge()->getModuleSetting(Constants::OXID_MODULE_ID.$configParamName)->getValue();
+		} catch (\Throwable $throwable) {
+			if ($displayThrowable){
+				Registry::getUtilsView()->addErrorToDisplay($throwable);
+			}
+			Registry::getLogger()->error($throwable->getMessage());
+		}
     }
-
+	
+	/**
+	 * @return \OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\DataObject\ModuleConfiguration
+	 * @throws \Psr\Container\ContainerExceptionInterface
+	 * @throws \Psr\Container\NotFoundExceptionInterface
+	 */
+	public function d3GetGa4ModuleConfigurationBridge() :\OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\DataObject\ModuleConfiguration
+	{
+		/** @var \OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\DataObject\ModuleConfiguration $oModuleSettingsBridge */
+		return ContainerFactory::getInstance()
+			->getContainer()
+			->get(ModuleConfigurationDaoBridgeInterface::class)->get(Constants::OXID_MODULE_ID);
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function d3GetModuleSettingNameArray() :array
+	{
+		$tmp  = [];
+		
+		foreach ($this->d3GetGa4ModuleConfigurationBridge()->getModuleSettings() as $arrayEntry){
+			$tmp[] = $arrayEntry->getName();
+		}
+		
+		return $tmp;
+	}
+	
     /**
      * @return bool
      */
