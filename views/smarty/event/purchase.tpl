@@ -43,7 +43,7 @@
                             'item_category4':   '[{$gtmPurchaseItemCategory->getSplitCategoryArray(3, true)}]',
                             'item_list_name':   '[{$gtmPurchaseItemCategory->getSplitCategoryArray()}]',
                             [{/if}]
-                            'price':            [{$gtmPurchaseItemPriceObject->getPrice()}],
+                            [{oxhasrights ident="SHOWARTICLEPRICE"}]'price':            [{$gtmPurchaseItemPriceObject->getPrice()}],[{/oxhasrights}]
                             'quantity':         [{$gtmBasketItem->getFieldData("oxamount")}],
                             'position':         [{$smarty.foreach.gtmArticles.iteration}]
                         }[{if !$smarty.foreach.gtmArticles.last}],[{/if}]

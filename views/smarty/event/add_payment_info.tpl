@@ -38,7 +38,7 @@
                     'item_category4':  '[{$gtmBasketItemCategory->getSplitCategoryArray(3, true)}]',
                     'item_list_name':   '[{$gtmBasketItemCategory->getSplitCategoryArray()}]',
                     [{/if}]
-                    'price':            [{$gtmItemPriceObject->getPrice()}],
+                    [{oxhasrights ident="SHOWARTICLEPRICE"}]'price':            [{$gtmItemPriceObject->getPrice()}],[{/oxhasrights}]
                     'coupon':           '[{foreach from=$oxcmp_basket->getVouchers() item=sVoucher key=key name=Voucher}][{$sVoucher->sVoucherNr}][{if !$smarty.foreach.Voucher.last}], [{/if}][{/foreach}]',
                     'quantity':         [{$basketitem->getAmount()}],
                     'position':         [{$smarty.foreach.gtmCartContents.index}]

@@ -34,13 +34,13 @@
   "require": {
     "php": "^8.0",
     "oxid-esales/oxideshop-ce": "7.0 - 7.2",
-    "google/apiclient":" ^2.0",
-    "phpstan/phpstan": "^1.10"
+    "google/apiclient":" ^2.0"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3.9"
+    "friendsofphp/php-cs-fixer": "^3.9",
+    "phpstan/phpstan": "^1.10"
   },
-  "autoload": {
+    "autoload": {
     "psr-4": {
       "D3\\GoogleAnalytics4\\": ""
     }
