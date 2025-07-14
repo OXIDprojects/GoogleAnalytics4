@@ -3,9 +3,9 @@
 return [
     'charset'                   => 'UTF-8',
 
-    'd3mxgoogleanalytics4'      => 'Google Analytics 4',
+    'D3MXGOOGLEANALYTICS4'      => 'Google Analytics 4',
     'd3mxd3modules'             => $aLangCache['d3mxd3modules'] ?? 'Google Analytics 4',
-    'd3mxgoogleanalytics4set'   => 'Einstellungen',
+    'D3MXGOOGLEANALYTICS4SET'   => 'Einstellungen',
 
     // Base Translations
     'D3BASECONFIG'              => 'Grundeinstellungen',

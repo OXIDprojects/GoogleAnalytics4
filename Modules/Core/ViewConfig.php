@@ -45,7 +45,7 @@ class ViewConfig extends ViewConfig_parent
     public function getGtmContainerId()
     {
         if ($this->sContainerId === null) {
-            $this->sContainerId = $this->d3GetModuleConfigParam("_sContainerID");
+            $this->sContainerId = str_replace(' ', '', $this->d3GetModuleConfigParam("_sContainerID"));
         }
         return $this->sContainerId;
     }
