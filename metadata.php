@@ -52,7 +52,7 @@ $aModule = [
                       Die Entwicklung basiert auf einem Fork von Marat Bedoev - <a href='https://github.com/vanilla-thunder/oxid-module-gtm'>Github-Link</a>
                       ",
     'thumbnail' => 'thumbnail.png',
-    'version' => '2.21.0',
+    'version' => '2.24.0.0',
     'author' => 'Data Development (Inh.: Thomas Dartsch)',
     'email' => 'support@shopmodule.com',
     'url' => 'https://www.oxidmodule.com/',
@@ -90,7 +90,7 @@ $aModule = [
         // Event files that store the GA4 Event-Information
         'event/add_to_cart.tpl' => 'd3/googleanalytics4/Application/views/event/add_to_cart.tpl',
         'event/view_item.tpl' => 'd3/googleanalytics4/Application/views/event/view_item.tpl',
-        'event/view_item.tpl' => 'd3/googleanalytics4/Application/views/event/view_item.tpl',
+        'event/view_cart.tpl' => 'd3/googleanalytics4/Application/views/event/view_cart.tpl',
         'event/begin_checkout.tpl' => 'd3/googleanalytics4/Application/views/event/begin_checkout.tpl',
         'event/add_payment_info.tpl' => 'd3/googleanalytics4/Application/views/event/add_payment_info.tpl',
         'event/purchase.tpl' => 'd3/googleanalytics4/Application/views/event/purchase.tpl',

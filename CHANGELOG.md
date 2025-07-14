@@ -4,7 +4,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.17.2...rel_2.x) - 2024-x
+## [unreleased](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.24.0.0...rel_2.x) - 2025-x
+
+## [2.24.0.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.2...2.24.0.0) - 2025-06-12
+### Fixed
+- return payment-object instead of string
+- missing semicolon
+- irritating admin-list module-group-name
+### Added
+- 'item_oxid' parameter
+- 'item_brand' parameter
+- setting to use literal category-title
+- setting to replace chars in item_category-parameter
+- setting to list article-variants into parameter-array
+
+## [2.23.0.2](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.1...2.23.0.2) - 2025-03-19
+### Fixed
+- reset of cmp-selection
+- over-engineered getter-methods
+
+## [2.23.0.1](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.0...2.23.0.1) - 2025-02-19
+### Fixed
+- false metadata view_cart entry
+- missing menu-translation
+### Added
+- data layer doesn't contain prices if current user hasn't "show price" rights
+
+## [2.23.0.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.22.0...2.23.0.0) - 2024-12-21
+### Added
+- another tag-versioning position
+- additional global variables, if given
+
+## [2.22.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.21.0...2.22.0) - 2024-09-21
+### Fixed
+- Consentmanager didn't get delivered
+### Changed
+- write "internal_names" of CMP to constants
 
 ## [2.21.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.20.1...2.21.0) - 2024-09-19
 ### Fixed

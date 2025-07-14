@@ -26,21 +26,24 @@
                         [{assign var="gtmPurchaseItemPriceObject"   value=$gtmBasketItem->getPrice()}]
                         [{assign var="gtmPurchaseItem"              value=$gtmBasketItem->getArticle()}]
                         [{assign var="gtmPurchaseItemCategory"      value=$gtmPurchaseItem->getCategory()}]
+                        [{assign var="gtmManufacturer"              value=$gtmPurchaseItem->getManufacturer()}]
 
                         {
+                            'item_oxid':        '[{$gtmBasketItem->getFieldData("oxid")}]',
                             'item_id':          '[{$gtmBasketItem->getFieldData("oxartnum")}]',
-                            'item_name':        '[{$gtmBasketItem->getFieldData("oxtitle")}]',
-                            'affiliation':      '[{$gtmBasketItem->getFieldData("oxtitle")}]',
+                            'item_name':        '[{$gtmBasketItem->getRawFieldData("oxtitle")}]',
+                            'affiliation':      '[{$gtmBasketItem->getRawFieldData("oxtitle")}]',
                             'coupon':           '[{foreach from=$gtmOrderVouchers item="gtmOrderVoucher" name="gtmOrderVoucherIteration"}][{$gtmOrderVoucher}][{if !$smarty.foreach.gtmOrderVoucherIteration.last}], [{/if}][{/foreach}]',
                             'item_variant':     '[{$gtmBasketItem->getFieldData("oxselvariant")}]',
+                            'item_brand': '[{if $gtmManufacturer}][{$gtmManufacturer->oxmanufacturers__oxtitle->value}][{/if}]',
                             [{if $gtmPurchaseItemCategory}]
                             'item_category':    '[{$gtmPurchaseItemCategory->getSplitCategoryArray(0, true)}]',
-                            'item_category_2':  '[{$gtmPurchaseItemCategory->getSplitCategoryArray(1, true)}]',
-                            'item_category_3':  '[{$gtmPurchaseItemCategory->getSplitCategoryArray(2, true)}]',
-                            'item_category_4':  '[{$gtmPurchaseItemCategory->getSplitCategoryArray(3, true)}]',
+                            'item_category2':   '[{$gtmPurchaseItemCategory->getSplitCategoryArray(1, true)}]',
+                            'item_category3':   '[{$gtmPurchaseItemCategory->getSplitCategoryArray(2, true)}]',
+                            'item_category4':   '[{$gtmPurchaseItemCategory->getSplitCategoryArray(3, true)}]',
                             'item_list_name':   '[{$gtmPurchaseItemCategory->getSplitCategoryArray()}]',
                             [{/if}]
-                            'price':            [{$gtmPurchaseItemPriceObject->getPrice()}],
+                            [{oxhasrights ident="SHOWARTICLEPRICE"}]'price':            [{$gtmPurchaseItemPriceObject->getPrice()}],[{/oxhasrights}]
                             'quantity':         [{$gtmBasketItem->getFieldData("oxamount")}],
                             'position':         [{$smarty.foreach.gtmArticles.iteration}]
                         }[{if !$smarty.foreach.gtmArticles.last}],[{/if}]
@@ -49,7 +52,7 @@
                 }[{if $oViewConf->isDebugModeOn()}],
                 'debug_mode': 'true'
                 [{/if}]
-            })
+            });
         [{/strip}]
     [{/capture}]
     [{oxscript add=$smarty.capture.d3_ga4_purchase}]

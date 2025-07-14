@@ -80,7 +80,6 @@
                                             [{oxmultilang ident="D3CMP"}]
                                         </label>
                                         <select class="form-select w-50" name="editval[select][_HAS_STD_MANAGER]" aria-label="Default select example">
-                                            <option value="NONE" selected>[{oxmultilang ident="D3NONE"}]</option>
                                             [{foreach from=$d3ManagerTypeArray key="sInternalName" item="sPublicName" name="editval[aCmpNameArray]"}]
                                             <option value="[{$sInternalName}]" [{if $sInternalName === $d3CurrentCMP}]SELECTED[{/if}]>[{$sPublicName}]</option>
                                             [{/foreach}]
@@ -141,6 +140,43 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <button type="submit" name="save" class="btn btn-light w-100" onClick="Javascript:document.d3gtmformedit.fnc.value='save'">[{oxmultilang ident="GENERAL_SAVE"}]</button>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-viewitemvariants" aria-expanded="false" aria-controls="panelsStayOpen-viewitemvariants">
+                                    [{oxmultilang ident="D3EXTENDEDCONFIG"}]
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-viewitemvariants" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="editval[bool][_blViewItemAddVariants]" [{if $d3ViewObject->d3GetModuleConfigParam('_blViewItemAddVariants')}]checked[{/if}] id="blGA4enab">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            [{oxmultilang ident="D3VIEWITEMADDVARIANTS"}][{oxinputhelp ident="D3VIEWITEMADDVARIANTS_HELP"}]
+                                        </label>
+                                    </div>
+                                    <hr>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="_blUseRealCategoyTitles"
+                                               name="editval[bool][_blUseRealCategoyTitles]"
+                                               [{if $d3ViewObject->d3GetModuleConfigParam('_blUseRealCategoyTitles')}]checked[{/if}]>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            [{oxmultilang ident="D3USEREALCATTITLES"}][{oxinputhelp ident="D3USEREALCATTITLES_HELP"}]
+                                        </label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="input-group w-50">
+                                        <span class="input-group-text"
+                                              id="basic-addon3">[{oxmultilang ident="D3REPLACECHARS"}]</span>
+                                            <input type="text" class="form-control" id="_sReplaceChars"
+                                                   name="editval[str][_sReplaceChars]" aria-describedby="basic-addon3"
+                                                   value='[{$d3ViewObject->d3GetModuleConfigParam('_sReplaceChars')}]'/>
+                                        </div>
+                                        <div class="text-muted">[{oxmultilang ident="D3REPLACECHARS_HELP"}]</div>
                                     </div>
                                 </div>
                                 <button type="submit" name="save" class="btn btn-light w-100" onClick="Javascript:document.d3gtmformedit.fnc.value='save'">[{oxmultilang ident="GENERAL_SAVE"}]</button>

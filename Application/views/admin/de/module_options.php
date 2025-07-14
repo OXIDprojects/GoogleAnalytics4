@@ -31,6 +31,7 @@ $aLang = [
     'SHOP_MODULE_'.Constants::OXID_MODULE_ID.'_blGA4enab'          => 'GA4 Aktivieren',
     'SHOP_MODULE_'.Constants::OXID_MODULE_ID.'_blUAenabled'        => 'UA Aktivieren',
     'SHOP_MODULE_'.Constants::OXID_MODULE_ID.'_blEnableDebug'      => 'Debug-Modus aktivieren',
+    'SHOP_MODULE_'.Constants::OXID_MODULE_ID.'_blUseRealCategoyTitles' => 'Statt URL-Teilen die tatsächlichen Kategorie-Titel verwenden (item_category)',
 
     // Serverside - tagging
     'SHOP_MODULE_GROUP_'.Constants::OXID_MODULE_ID.'_serversidetagging'         => 'Server-Side tagging',

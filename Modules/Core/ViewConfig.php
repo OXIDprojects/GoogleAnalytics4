@@ -55,7 +55,7 @@ class ViewConfig extends ViewConfig_parent
         {
             /** @var ManagerHandler $oManagerHandler */
             $oManagerHandler = oxNew(ManagerHandler::class);
-            $this->sCookieManagerType = $oManagerHandler->getCurrManager();
+            $this->sCookieManagerType = $oManagerHandler->getActManager();
         }
     }
     /**
@@ -64,6 +64,14 @@ class ViewConfig extends ViewConfig_parent
     public function shallUseOwnCookieManager() :bool
     {
         return (bool) $this->d3GetModuleConfigParam('_blEnableOwnCookieManager');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCharsToReplaceInCategorTitles(): string
+    {
+        return (string) $this->d3GetModuleConfigParam('_sReplaceChars');
     }
 
     /**
@@ -88,7 +96,7 @@ class ViewConfig extends ViewConfig_parent
         $sCookieID = trim($this->d3GetModuleConfigParam('_sControlParameter'));
 
         // Netensio Cookie Manager
-        if ($this->sCookieManagerType === ManagerTypes::NET_COOKIE_MANAGER) {
+        if ($this->sCookieManagerType === ManagerTypes::INTERNAL_NET_COOKIE_MANAGER) {
             $oSession = Registry::getSession();
             $aCookies = $oSession->getVariable("aCookieSel");
 
@@ -96,20 +104,18 @@ class ViewConfig extends ViewConfig_parent
         }
 
         // Aggrosoft Cookie Consent
-        if ($this->sCookieManagerType === ManagerTypes::AGCOOKIECOMPLIANCE) {
+        if ($this->sCookieManagerType === ManagerTypes::INTERNAL_AGCOOKIECOMPLIANCE) {
             if (method_exists($this, "isCookieCategoryEnabled")) {
                 return $this->isCookieCategoryEnabled($sCookieID);
             }
         }
-
-        // UserCentrics or consentmanager
+		
         if (
-            $this->sCookieManagerType       === Usercentrics::sModuleIncludationInternalName
-            or $this->sCookieManagerType    === Usercentrics::sExternalIncludationInternalName
-            or $this->sCookieManagerType    === ManagerTypes::CONSENTMANAGER
-            or $this->sCookieManagerType    === ManagerTypes::COOKIEFIRST
-            or $this->sCookieManagerType    === ManagerTypes::COOKIEBOT
-            or $this->sCookieManagerType    === ManagerTypes::EXTERNAL_SERVICE
+	        in_array
+	        (
+				$this->sCookieManagerType,
+				(oxNew(ManagerTypes::class)->scriptTagDeliveredByDefaultArray())
+	        )
         )
         {
             // Always needs the script-tags delivered to the DOM.
@@ -140,16 +146,16 @@ class ViewConfig extends ViewConfig_parent
             return 'data-usercentrics="' . $sControlParameter . '" type="text/plain" async=""';
         }
 
-        if ($this->sCookieManagerType === ManagerTypes::CONSENTMANAGER)
+        if ($this->sCookieManagerType === ManagerTypes::INTERNAL_CONSENTMANAGER)
         {
             return 'type="text/plain" class="cmplazyload" data-cmp-vendor="'.$sControlParameter.'"';
         }
 
-        if ($this->sCookieManagerType === ManagerTypes::COOKIEFIRST){
+        if ($this->sCookieManagerType === ManagerTypes::INTERNAL_COOKIEFIRST){
             return 'type="text/plain" data-cookiefirst-category="' . $sControlParameter .'"';
         }
 
-        if ($this->sCookieManagerType === ManagerTypes::COOKIEBOT){
+        if ($this->sCookieManagerType === ManagerTypes::INTERNAL_COOKIEBOT){
             return 'type="text/plain" data-cookieconsent="' . $sControlParameter .'"';
         }
 
@@ -208,13 +214,48 @@ class ViewConfig extends ViewConfig_parent
             'sessionid' => session_id(),
             //'httpref'   => $_SERVER["HTTP_REFERER"] ?? "unknown"
         ];
+		
+		$dataLayer = $this->d3AdditionalGlobalAnalyticsVariables($dataLayer);
 
         return json_encode([$dataLayer], JSON_PRETTY_PRINT);
     }
+	
+	/**
+	 * @param array $dataLayerGlobals
+	 * @return array
+	 */
+	public function d3AdditionalGlobalAnalyticsVariables(array $dataLayerGlobals) :array
+	{
+		/** @var User $oUser */
+		$oUser  = Registry::getSession()->getUser();
+		if ($oUser and $oUser->getFieldData('OXUSERNAME')){
+			$sUsername 	= $oUser->getFieldData('OXUSERNAME') ?: "";
+			$iCustNr 			= $oUser->getFieldData('OXCUSTNR') ?: "";
+			$iZipCode 		= $oUser->getFieldData('OXZIP') ?: "";
+			
+			return array_merge($dataLayerGlobals, [
+				'custnr'		=> $iCustNr,
+				'email' 		=> $sUsername,
+				'zipcode' 	=> $iZipCode
+			]);
+		}
+		return $dataLayerGlobals;
+	}
 
+    /**
+     * @return bool
+     */
     public function isDebugModeOn() :bool
     {
         return $this->d3GetModuleConfigParam("_blEnableDebug")?: false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function useRealCategoryTitles(): bool
+    {
+        return $this->d3GetModuleConfigParam("_blUseRealCategoyTitles") ?: false;
     }
 
     /**

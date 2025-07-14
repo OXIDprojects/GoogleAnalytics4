@@ -21,7 +21,7 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
         $this->addTplParam('d3ViewObject', $this);
         $this->addTplParam('d3ViewConfObject', Registry::get(ViewConfig::class));
         $this->addTplParam('d3ManagerTypeArray', oxNew(ManagerTypes::class)->getManagerList());
-        $this->addTplParam('d3CurrentCMP', oxNew(ManagerHandler::class)->getCurrManager());
+        $this->addTplParam('d3CurrentCMP', oxNew(ManagerHandler::class)->getActManager());
 
         return $return;
     }
@@ -37,8 +37,10 @@ class GA4AdminUserInterface_main extends \OxidEsales\Eshop\Application\Controlle
             '_blEnableDebug',
             '_blEnableConsentMode',
             '_blEnableOwnCookieManager',
+            '_blUseRealCategoyTitles',
             '_blEnableMeasurementCapabilities',
             '_blEnableUsercentricsConsentModeApi',
+            '_blViewItemAddVariants',
         ];
 
         foreach ($aCheckBoxParams as $checkBoxName){
