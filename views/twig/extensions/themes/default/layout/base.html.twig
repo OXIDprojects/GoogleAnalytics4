@@ -10,11 +10,9 @@
             var dataLayer = {{ oViewConf.getGtmDataLayer()|raw }} || [];
         </script>
     {% endif %}
---2--
     {% if oViewConf.isGA4enabled() and oViewConf.D3blShowGtmScript() %}
         {% if d3GtmContainerIdString %}
-            {% apply spaceless %}#
-                --1--
+            {% apply spaceless %}
                 {% if oViewConf.isGtmConsentModeSetActivated() %}
                     <script type="text/javascript">
                         {% if oViewConf.d3IsUsercentricsCMPChosen() and oViewConf.d3GetModuleConfigParam('_blEnableMeasurementCapabilities') %}
