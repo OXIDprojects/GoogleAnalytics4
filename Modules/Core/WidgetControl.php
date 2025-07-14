@@ -4,7 +4,8 @@ namespace D3\GoogleAnalytics4\Modules\Core;
 
 use OxidEsales\EshopCommunity\Core\Registry;
 
-class WidgetControl extends WidgetControl_parent{
+class WidgetControl extends WidgetControl_parent
+{
     protected function getFrontendStartControllerKey() // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
     {
         /*
@@ -27,14 +28,12 @@ class WidgetControl extends WidgetControl_parent{
         )
          */
         $sScriptName = $_SERVER['SCRIPT_NAME'];
-        if($sScriptName !== '/widget.php')
-        {
+        if ($sScriptName !== '/widget.php') {
             return parent::getFrontendStartControllerKey();
         }
 
         $aParameter = $_GET;
-        if(is_null($aParameter['actcontrol']) and is_null($aParameter['oxwparent']))
-        {
+        if (is_null($aParameter['actcontrol']) and is_null($aParameter['oxwparent'])) {
             return 'D3\GoogleAnalytics4\Application\Component\Widget\d3GtmStartWidget';
         }
 

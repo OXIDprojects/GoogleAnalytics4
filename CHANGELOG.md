@@ -4,7 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.24.0.0...rel_2.x) - 2025-x
+## [unreleased](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/3.1.0.1...rel_3.x) - 2025-x
+
+## [3.1.0.1](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/3.1.0.0...3.1.0.1) - 2025-07-14
+### Fixed
+- missing namespace inclution
+- admin-UI list title
+- potential error on empty ContainerID ( whitespaces )
+
+## [3.1.0.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/3.0.0.1...3.1.0.0) - 2025-06-29
+### Changed
+- data getter and saver to 'state fo the art'
+### Added
+- Twig usability
+- previous major-version addings
+
+## [3.0.0.1](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/3.0.0.0...3.0.0.1) - 2024-03-19
+### Fixed
+- reset of cmp-selection
+- over-engineered getter-methods
+
+## [3.0.0.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.22.0...3.0.0.0) - 2024-11-25
+### Added
+- installability OXID 7
+- don't submit item prices, if user doesn't have "show price" right
 
 ## [2.24.0.0](https://git.d3data.de/D3Public/GoogleAnalytics4/compare/2.23.0.2...2.24.0.0) - 2025-06-12
 ### Fixed

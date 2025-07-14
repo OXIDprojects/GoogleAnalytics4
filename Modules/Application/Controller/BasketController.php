@@ -16,7 +16,7 @@ class BasketController extends BasketController_parent
     public function render()
     {
         $return = parent::render();
-
+		
         $this->d3GA4getRemovedArticlesListObject();
 
         return $return;
@@ -26,7 +26,7 @@ class BasketController extends BasketController_parent
      * @return void
      * @throws oxSystemComponentException
      */
-    public function d3GA4getRemovedArticlesListObject() :void
+    public function d3GA4getRemovedArticlesListObject(): void
     {
         $this->addTplParam('hasBeenReloaded', false);
         // collecting items to add
@@ -52,7 +52,7 @@ class BasketController extends BasketController_parent
                 'am'           => $dAmount,
                 'sel'          => $aSel,
                 'persparam'    => $aPersParam,
-                'basketitemid' => $sBasketItemId
+                'basketitemid' => $sBasketItemId,
             ];
         }
 
@@ -84,9 +84,9 @@ class BasketController extends BasketController_parent
             #dumpVar($this->getBasketArticles());
 
             /** @var Article $item */
-            foreach ($oArtList->getArray() as $item){
-                foreach ($artIdOnArtAmountList as $artId => $artAmount){
-                    if ($item->getId() === $artId){
+            foreach ($oArtList->getArray() as $item) {
+                foreach ($artIdOnArtAmountList as $artId => $artAmount) {
+                    if ($item->getId() === $artId) {
                         $item->assign(['d3AmountThatGotRemoved' => $artAmount]);
                     }
                 }
@@ -104,13 +104,13 @@ class BasketController extends BasketController_parent
      * if that doesn't work, we check if there's an Article in the Products array, that has "'am' = 0"
      * Which also shows we're in that state rn
      */
-    protected function isArticleRemovedState(array $productsArray) :bool
+    protected function isArticleRemovedState(array $productsArray): bool
     {
         if (Registry::getRequest()->getRequestEscapedParameter('removeBtn')
             or Registry::getRequest()->getRequestEscapedParameter('updateBtn')
-        ){
+        ) {
             return true;
-        }else{
+        } else {
             foreach ($productsArray as $aProduct) {
                 if (intval($aProduct['am']) === 0) {
                     return true;

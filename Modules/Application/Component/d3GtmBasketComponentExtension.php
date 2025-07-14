@@ -24,9 +24,9 @@ class d3GtmBasketComponentExtension extends d3GtmBasketComponentExtension_parent
 
         $iAmountArticlesAddedToCart = (int) Registry::getRequest()->getRequestEscapedParameter('am');
 
-        if ($iAmountArticlesAddedToCart){
+        if ($iAmountArticlesAddedToCart) {
             Registry::getSession()->setVariable('d3GtmAddToCartAmountArticles', $iAmountArticlesAddedToCart);
-        }else{
+        } else {
             Registry::getSession()->setVariable('d3GtmAddToCartAmountArticles', 1);
         }
 
@@ -36,7 +36,7 @@ class d3GtmBasketComponentExtension extends d3GtmBasketComponentExtension_parent
     /**
      * @return int
      */
-    public function getD3GtmAddToCartAmountArticles() :int
+    public function getD3GtmAddToCartAmountArticles(): int
     {
         $iAmount = Registry::getSession()->getVariable('d3GtmAddToCartAmountArticles');
 
@@ -48,7 +48,7 @@ class d3GtmBasketComponentExtension extends d3GtmBasketComponentExtension_parent
     /**
      * @return bool
      */
-    public function getAddToBasketDecision() :bool
+    public function getAddToBasketDecision(): bool
     {
         $decision = Registry::getSession()->getVariable('d3GtmAddToBasketTrigger');
 
@@ -66,7 +66,7 @@ class d3GtmBasketComponentExtension extends d3GtmBasketComponentExtension_parent
 
         $oArticle = null;
 
-        if ($sAnid){
+        if ($sAnid) {
             /** @var Article $oArticle */
             $oArticle = oxNew(Article::class);
             $oArticle->load($sAnid);

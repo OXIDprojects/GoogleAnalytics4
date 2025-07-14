@@ -16,7 +16,7 @@ class ThankYouController extends ThankYouController_parent
         $oOrder = $this->getOrder();
         $sCountryId = $oOrder->getFieldData('oxbillcountryid');
 
-        /** @var Country $oCountry */
+        /** @var Country::class $oCountry */
         $oCountry = oxNew(Country::class);
         $oCountry->load($sCountryId);
 

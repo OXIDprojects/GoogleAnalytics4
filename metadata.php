@@ -52,12 +52,12 @@ $aModule = [
                       Die Entwicklung basiert auf einem Fork von Marat Bedoev - <a href='https://github.com/vanilla-thunder/oxid-module-gtm'>Github-Link</a>
                       ",
     'thumbnail' => 'thumbnail.png',
-    'version' => '2.24.0.0',
+    'version' => '3.1.0.1',
     'author' => 'Data Development (Inh.: Thomas Dartsch)',
     'email' => 'support@shopmodule.com',
     'url' => 'https://www.oxidmodule.com/',
     'controllers' => [
-        'd3googleanalytics4_main' => GA4AdminUserInterfaceMainController::class
+        'd3googleanalytics4_main' => GA4AdminUserInterfaceMainController::class,
     ],
     'extend' => [
         // Core
@@ -88,116 +88,201 @@ $aModule = [
     ],
     'templates' => [
         // Event files that store the GA4 Event-Information
-        'event/add_to_cart.tpl' => 'd3/googleanalytics4/Application/views/event/add_to_cart.tpl',
-        'event/view_item.tpl' => 'd3/googleanalytics4/Application/views/event/view_item.tpl',
-        'event/view_cart.tpl' => 'd3/googleanalytics4/Application/views/event/view_cart.tpl',
-        'event/begin_checkout.tpl' => 'd3/googleanalytics4/Application/views/event/begin_checkout.tpl',
-        'event/add_payment_info.tpl' => 'd3/googleanalytics4/Application/views/event/add_payment_info.tpl',
-        'event/purchase.tpl' => 'd3/googleanalytics4/Application/views/event/purchase.tpl',
-        'event/view_item_list.tpl' => 'd3/googleanalytics4/Application/views/event/view_item_list.tpl',
-        'event/view_search_result.tpl' => 'd3/googleanalytics4/Application/views/event/view_search_result.tpl',
-        'event/remove_from_cart.tpl' => 'd3/googleanalytics4/Application/views/event/remove_from_cart.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/add_to_cart.tpl'      => 'views/smarty/event/add_to_cart.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/view_item.tpl'        => 'views/smarty/event/view_item.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/view_cart.tpl'        => 'views/smarty/event/view_cart.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/begin_checkout.tpl'   => 'views/smarty/event/begin_checkout.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/add_payment_info.tpl' => 'views/smarty/event/add_payment_info.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/purchase.tpl'         => 'views/smarty/event/purchase.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/view_item_list.tpl'   => 'views/smarty/event/view_item_list.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/view_search_result.tpl' => 'views/smarty/event/view_search_result.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/event/remove_from_cart.tpl' => 'views/smarty/event/remove_from_cart.tpl',
 
         // complete overwritten file of OXID-Originals
         // the path of the template-name is the original path to the file in OXID-context from tpl/->
-        'page/account/d3gtmnoticelist.tpl' => 'd3/googleanalytics4/Application/views/tpl/page/account/d3gtmnoticelist.tpl',
-        'page/account/d3gtmrecommendationlist.tpl' => 'd3/googleanalytics4/Application/views/tpl/page/account/d3gtmrecommendationlist.tpl',
-        'page/account/d3gtmwishlist.tpl' => 'd3/googleanalytics4/Application/views/tpl/page/account/d3gtmwishlist.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/d3gtmnoticelist.tpl'            => 'views/smarty/d3gtmnoticelist.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/d3gtmrecommendationlist.tpl'    => 'views/smarty/d3gtmrecommendationlist.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/d3gtmwishlist.tpl'              => 'views/smarty/d3gtmwishlist.tpl',
 
         // Admin Templates
-        'ga4/admin/d3ga4uimain.tpl' => 'd3/googleanalytics4/Application/views/admin/tpl/d3googleanalytics4_main.tpl',
-        'ga4/admin/d3ga4uiheaditem.tpl' => 'd3/googleanalytics4/Application/views/admin/tpl/d3googleanalytics4_headitem.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/admin/d3ga4uimain.tpl'          => 'views/smarty/admin/d3googleanalytics4_main.tpl',
+        '@' . Constants::OXID_MODULE_ID . '/admin/d3ga4uiheaditem.tpl'      => 'views/smarty/admin/d3googleanalytics4_headitem.tpl',
     ],
     'blocks' => [
         // tag manager js
         [
             'template' => 'layout/base.tpl',
             'block' => 'head_meta_robots',
-            'file' => '/Application/views/blocks/_gtm_js.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/_gtm_js.tpl',
+            'position' => 150,
         ],
         // tag manager nojs
         [
             'template' => 'layout/base.tpl',
             'block' => 'theme_svg_icons',
-            'file' => '/Application/views/blocks/_gtm_nojs.tpl'
+            'file' => 'views/smarty/blocks/_gtm_nojs.tpl',
+			'position' => 150,
         ],
         // details
         [
             'template' => 'page/details/inc/productmain.tpl',
             'block' => 'details_productmain_title',
-            'file' => '/Application/views/blocks/view_item.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/view_item.tpl',
+            'position' => 150,
         ],
         // View Cart
         [
             'template' => 'page/checkout/basket.tpl',
             'block' => 'checkout_basket_main',
-            'file' => '/Application/views/blocks/view_cart.tpl'
+            'file' => 'views/smarty/blocks/view_cart.tpl',
+            'position' => 150,
         ],
         // add_to_cart
         [
             'template' => 'page/details/inc/productmain.tpl',
             'block' => 'details_productmain_tobasket',
-            'file' => '/Application/views/blocks/details_productmain_tobasket.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/details_productmain_tobasket.tpl',
+            'position' => 150,
         ],
         // remove_from_cart
         [
             'template' => 'page/checkout/basket.tpl',
             'block' => 'checkout_basket_main',
-            'file' => '/Application/views/blocks/remove_from_cart.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/remove_from_cart.tpl',
+            'position' => 150,
         ],
         [
             'template' => 'page/checkout/thankyou.tpl',
             'block' => 'checkout_thankyou_main',
-            'file' => '/Application/views/blocks/purchase.tpl'
+            'file' => 'views/smarty/blocks/purchase.tpl',
+			'position' => 150,
         ],
         // Lists
         // view_item_list
         [
             'template' => 'page/list/list.tpl',
             'block' => 'page_list_productlist',
-            'file' => '/Application/views/blocks/view_item_list.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/view_item_list.tpl',
+            'position' => 150,
         ],
         // view_search_result
         [
             'template' => 'page/search/search.tpl',
             'block' => 'search_results',
-            'file' => '/Application/views/blocks/view_search_result.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/view_search_result.tpl',
+            'position' => 150,
         ],
         [
             'template' => 'page/list/list.tpl',
             'block' => 'page_list_listbody',
-            'file' => '/Application/views/blocks/page_list_listbody.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/page_list_listbody.tpl',
+            'position' => 150,
         ],
         [
             'template' => 'page/shop/start.tpl',
             'block' => 'start_welcome_text',
-            'file' => '/Application/views/blocks/start_welcome_text.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/start_welcome_text.tpl',
+            'position' => 150,
         ],
         // Checkout process
         // Begin CHeckout
         [
             'template' => 'page/checkout/user.tpl',
             'block' => 'checkout_user_main',
-            'file' => '/Application/views/blocks/begin_checkout.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/begin_checkout.tpl',
+            'position' => 150,
         ],
-        // Add payment info
-        // We add it into checkout_order_main ( checkout/order.tpl ) to make sure a payment is actually added;
-        // we'll also do it like that in the future for add_shipping_info ( not planed yet )
         [
             'template' => 'page/checkout/order.tpl',
             'block' => 'checkout_order_main',
-            'file' => '/Application/views/blocks/add_payment_info.tpl',
-            'position' => 150
+            'file' => 'views/smarty/blocks/add_payment_info.tpl',
+            'position' => 150,
         ],
+    ],
+    'settings' => [
+        /* String values */
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sContainerID',
+            'type'  => 'str',
+            'value' => 'GTM-'
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sControlParameter',
+            'type'  => 'str',
+            'value' => ''
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sServersidetagging_js',
+            'type'  => 'str',
+            'value' => 'https://www.googletagmanager.com/gtm.js'
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sServersidetagging_nojs',
+            'type'  => 'str',
+            'value' => 'https://www.googletagmanager.com/ns.html'
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sReplaceChars',
+            'type'  => 'str',
+            'value' => ''
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sMeasurementCapabilities',
+            'type'  => 'str',
+            'value' => ''
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_sUsercentricsConsentModeApi',
+            'type'  => 'str',
+            'value' => 'Testshop'
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_HAS_STD_MANAGER',
+            'type'  => 'str',
+            'value' => 'externalService'
+        ],
+
+        /* Bool values */
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableGa4',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableDebug',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableConsentMode',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableOwnCookieManager',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blViewItemAddVariants',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blUseRealCategoyTitles',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableMeasurementCapabilities',
+            'type'  => 'bool',
+            'value' => false
+        ],
+        [
+            'name'  => Constants::OXID_MODULE_ID.'_blEnableUsercentricsConsentModeApi',
+            'type'  => 'bool',
+            'value' => false
+        ]
     ],
     'events' => [
         'onActivate' => '\D3\GoogleAnalytics4\Setup\Events::onActivate',
